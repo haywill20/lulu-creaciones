@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { productos } from "../../data/DataProductos";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const recomendadosImagen = require.context("../../uploads", true);
+const recomendadosImagen = require.context("../../../../uploads", true);
 
 const Recomendados = () => {
   const [activeIndex, setActiveIndex] = useState(0);

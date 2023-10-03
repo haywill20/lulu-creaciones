@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DataCarousel } from "../../data/DataCarousel"; // Asegúrate de importar los datos
 
-const sliderImagen = require.context("../../uploads", true);
+const sliderImagen = require.context("../../../../uploads", true);
 
 const SectionOneHome = () => {
   const [activeItem, setActiveItem] = useState(0);

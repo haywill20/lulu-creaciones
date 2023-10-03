@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import RangoPrecio from "./RangoPrecio";
 import { DataCategorias } from "../../data/DataCategorias";
 
-const advertisingImagen = require.context("../../uploads", true);
+const advertisingImagen = require.context("../../../../uploads", true);
 
 const Categorias = () => {
   const [categoriaActiva, setCategoriaActiva] = useState(null);

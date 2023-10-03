@@ -1,7 +1,7 @@
 import React from "react";
 import { productos } from "../data/DataProductos";
 
-const productImagen = require.context("../uploads", true);
+const productImagen = require.context("../../../uploads", true);
 
 const CardProducto = () => {
   return (

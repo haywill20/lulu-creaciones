@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { DataCategorias } from "../../data/DataCategorias";
 import { productos } from "../../data/DataProductos";
 
-const productoImagen = require.context("../../uploads", true);
+const productoImagen = require.context("../../../../uploads", true);
 
 const CategoriasTab = () => {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(
