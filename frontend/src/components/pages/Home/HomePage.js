@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "../../common/Header";
 import TopBar from "../../common/TopBar";
-import Categorias from "./Categorias";
-import Productos from "./Productos";
+import Categorias from "../../Categorias";
+import Productos from "../../Productos";
 import CarouselHome from "./CarouselHome";
 import Footer from "../../common/Footer";
 

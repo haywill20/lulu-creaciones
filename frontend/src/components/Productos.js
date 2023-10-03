@@ -1,7 +1,7 @@
 import React from "react";
-import CardProducto from "../../shared/CardProducto";
-import CategoriasTab from "./CategoriasTab";
-import Recomendados from "./Recomendados";
+import CardProducto from "./shared/CardProducto";
+import CategoriasTab from "./pages/Home/CategoriasTab";
+import Recomendados from "./pages/Home/Recomendados";
 
 const Productos = () => {
   return (
