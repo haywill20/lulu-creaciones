@@ -1,0 +1,13 @@
+/* Estrellas grises */
+.star-gray {
+  color: rgb(223, 223, 223);
+}
+
+/* Estrellas amarillas */
+.star-yellow {
+  color: #fe980f;
+}
+
+.puntero:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,90 @@
+import React, { useState } from "react";
+import Logo from "../../assets/images/home/logo.png";
+
+const Header = () => {
+  const [menuVisible, setMenuVisible] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuVisible(!menuVisible);
+  };
+
+  return (
+    <>
+      <header id="header">
+        <div className="header-middle">
+          <div className="container">
+            <div className="row">
+              <div className="col-sm-4">
+                <div className="logo pull-left">
+                  <a href="index.html">
+                    <img src={Logo} alt="" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="col-sm-8">
+                <div className="mainmenu pull-right">
+                  <ul
+                    className={`nav navbar-nav collapse navbar-collapse ${
+                      menuVisible ? "show" : ""
+                    }`}
+                  >
+                    <li>
+                      <a href="index.html" className="active">
+                        Inicio
+                      </a>
+                    </li>
+                    <li className="dropdown">
+                      <a href="#">
+                        Tienda<i className="fa fa-angle-down"></i>
+                      </a>
+                      <ul role="menu" className="sub-menu">
+                        <li>
+                          <a href="shop.html">Productos</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li className="dropdown">
+                      <a href="404.html">Nosotros</a>
+                    </li>
+                    <li>
+                      <a href="contact-us.html">Contáctanos</a>
+                    </li>
+                    <li>
+                      <a href="ayuda.html">Ayuda</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="header-bottom">
+          <div className="container">
+            <div className="row">
+              <div className="col-sm-9">
+                <div className="navbar-header">
+                  <button
+                    type="button"
+                    className="navbar-toggle"
+                    data-toggle="collapse"
+                    data-target=".navbar-collapse"
+                    onClick={toggleMenu}
+                  >
+                    <span className="sr-only">Toggle navigation</span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    </>
+  );
+};
+
+export default Header;
