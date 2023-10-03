@@ -45,7 +45,7 @@ const Header = () => {
                       <Link to={"/contact"}>Contáctanos</Link>
                     </li>
                     <li>
-                      <a href="ayuda.html">Ayuda</a>
+                      <Link to={"/help"}>Ayuda</Link>
                     </li>
                   </ul>
                 </div>

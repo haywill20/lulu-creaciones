@@ -92,17 +92,17 @@ const ContactPage = () => {
                         href="https://www.facebook.com/people/L%C3%BAlu-Creaciones/100083575566640/?mibextid=ZbWKwL"
                         target="_blank"
                       >
-                        <i class="fa-brands fa-facebook-f"></i>{" "}
+                        <i className="fa-brands fa-facebook-f"></i>{" "}
                       </a>
                     </li>
                     <li>
                       <a href="https://www.instagram.com/" target="_blank">
-                        <i class="fa-brands fa-instagram"></i>{" "}
+                        <i className="fa-brands fa-instagram"></i>{" "}
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <i class="fa-brands fa-youtube"></i>{" "}
+                        <i className="fa-brands fa-youtube"></i>{" "}
                       </a>
                     </li>
                   </ul>
