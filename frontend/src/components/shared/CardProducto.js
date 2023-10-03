@@ -3,11 +3,11 @@ import { productos } from "../data/DataProductos";
 
 const productImagen = require.context("../../../uploads", true);
 
-const CardProducto = () => {
+const CardProducto = ({ products }) => {
   return (
     <>
-      {productos.slice(-6).map((producto) => (
-        <div className="col-sm-4" key={producto.id}>
+      {products.map((producto) => (
+        <div className="col-sm-3" key={producto.id}>
           <div className="product-image-wrapper">
             <div className="single-products">
               <div className="productinfo text-center">

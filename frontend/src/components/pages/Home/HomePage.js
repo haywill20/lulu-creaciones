@@ -2,11 +2,17 @@ import React from "react";
 import Header from "../../common/Header";
 import TopBar from "../../common/TopBar";
 import Categorias from "../../Categorias";
-import Productos from "../../Productos";
+import CategoriasTab from "./CategoriasTab";
+import CardProducto from "../../shared/CardProducto";
+import Recomendados from "./Recomendados";
 import CarouselHome from "./CarouselHome";
 import Footer from "../../common/Footer";
+import { productos } from "../../data/DataProductos"; // Importa la lista de productos
 
-const Home = () => {
+const HomePage = () => {
+  // Mostrar solo los primeros 6 productos en la vista Home
+  const first6Products = productos.slice(0, 8);
+
   return (
     <>
       <TopBar />
@@ -16,7 +22,15 @@ const Home = () => {
         <div className="container">
           <div className="row">
             <Categorias />
-            <Productos />
+            <div className="col-sm-9 padding-right">
+              <div className="features_items">
+                <h2 className="title text-center">Productos</h2>
+                {/* Pasa la lista de productos a CardProducto */}
+                <CardProducto products={first6Products} />
+              </div>
+              <CategoriasTab />
+              <Recomendados />
+            </div>
           </div>
         </div>
       </section>
@@ -25,4 +39,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

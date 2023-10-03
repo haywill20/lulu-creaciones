@@ -17,9 +17,9 @@ const Header = () => {
             <div className="row">
               <div className="col-sm-4">
                 <div className="logo pull-left">
-                  <a href="index.html">
+                  <Link to={"/"}>
                     <img src={Logo} alt="" />
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -31,12 +31,12 @@ const Header = () => {
                     }`}
                   >
                     <li>
-                      <a href="index.html" className="active">
+                      <Link to={"/"} className="active">
                         Inicio
-                      </a>
+                      </Link>
                     </li>
                     <li className="dropdown">
-                      <Link to="/shop">Tienda</Link>
+                      <Link to={"/shop"}>Tienda</Link>
                     </li>
                     <li className="dropdown">
                       <a href="404.html">Nosotros</a>
