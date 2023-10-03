@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Logo from "../../assets/images/home/logo.png";
 
 const Header = () => {
@@ -35,14 +36,7 @@ const Header = () => {
                       </a>
                     </li>
                     <li className="dropdown">
-                      <a href="#">
-                        Tienda<i className="fa fa-angle-down"></i>
-                      </a>
-                      <ul role="menu" className="sub-menu">
-                        <li>
-                          <a href="shop.html">Productos</a>
-                        </li>
-                      </ul>
+                      <Link to="/shop">Tienda</Link>
                     </li>
                     <li className="dropdown">
                       <a href="404.html">Nosotros</a>
