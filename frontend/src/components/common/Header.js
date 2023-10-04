@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "../../assets/images/home/logo.png";
 
 const Header = () => {
   const [menuVisible, setMenuVisible] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
@@ -31,21 +32,45 @@ const Header = () => {
                     }`}
                   >
                     <li>
-                      <Link to={"/"} className="active">
+                      <Link
+                        to={"/"}
+                        className={location.pathname === "/" ? "active" : ""}
+                      >
                         Inicio
                       </Link>
                     </li>
                     <li className="dropdown">
-                      <Link to={"/shop"}>Tienda</Link>
+                      <Link
+                        to={"/shop"}
+                        className={
+                          location.pathname === "/shop" ? "active" : ""
+                        }
+                      >
+                        Productos
+                      </Link>
                     </li>
                     <li className="dropdown">
-                      <a href="404.html">Nosotros</a>
+                      <Link to={"/about"}>Nosotros</Link>
                     </li>
-                    <li>
-                      <Link to={"/contact"}>Contáctanos</Link>
+                    <li className="dropdown">
+                      <Link
+                        to={"/contact"}
+                        className={
+                          location.pathname === "/contact" ? "active" : ""
+                        }
+                      >
+                        Contáctanos
+                      </Link>
                     </li>
-                    <li>
-                      <Link to={"/help"}>Ayuda</Link>
+                    <li className="dropdown">
+                      <Link
+                        to={"/help"}
+                        className={
+                          location.pathname === "/help" ? "active" : ""
+                        }
+                      >
+                        Ayuda
+                      </Link>
                     </li>
                   </ul>
                 </div>

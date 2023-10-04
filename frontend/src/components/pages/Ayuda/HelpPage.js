@@ -1,10 +1,12 @@
 import React from "react";
 import Footer from "../../common/Footer";
 import Header from "../../common/Header";
+import TopBar from "../../common/TopBar";
 
 const HelpPage = () => {
   return (
     <>
+      <TopBar />
       <Header />
       <div id="contact-page" className="container">
         <div className="bg">

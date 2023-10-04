@@ -103,7 +103,7 @@ const Footer = () => {
                   <form action="#" className="searchform">
                     <input type="text" placeholder="Su dirección de correo" />
                     <button type="submit" className="btn btn-default">
-                      <i className="fa fa-arrow-circle-o-right"></i>
+                      <i class="fa-regular fa-circle-right"></i>{" "}
                     </button>
                     <p>
                       Obtenga actualizaciones de nuestros <br />
