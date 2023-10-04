@@ -20,11 +20,4 @@ export const DataCarousel = [
     boton: "Boton 3",
     imagen: "imgCarousel3.png",
   },
-  {
-    titulo: "Titulo 3",
-    subtitulo: "Subtitulo 3",
-    parrafo: "Parrafo 3",
-    boton: "Boton 3",
-    imagen: "imgCarousel2.png",
-  },
 ];

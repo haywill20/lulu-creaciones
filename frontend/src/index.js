@@ -4,9 +4,6 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-//Importacion de boostrap
-import "bootstrap/dist/css/bootstrap.min.css";
-
 import "./assets/css/price-range.css";
 import "./assets/css/animate.css";
 import "./assets/css/main.css";
