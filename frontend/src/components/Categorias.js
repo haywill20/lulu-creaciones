@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RangoPrecio from "./RangoPrecio";
-import { DataCategorias } from "./data/DataCategorias";
+import axios from "axios";
 
 const advertisingImagen = require.context("../../uploads", true);
 
-const Categorias = () => {
-  const [categoriaActiva, setCategoriaActiva] = useState(null);
+const URI = "http://localhost:8000/categorias/";
 
-  const toggleCategoria = (categoria) => {
-    if (categoriaActiva === categoria) {
-      // Si la categoría está activa, la desactivamos
-      setCategoriaActiva(null);
-    } else {
-      // Si la categoría no está activa, la activamos
-      setCategoriaActiva(categoria);
+const Categorias = () => {
+  const [categorias, setCategorias] = useState([]);
+
+  useEffect(() => {
+    getCategorias();
+  }, []);
+
+  const getCategorias = async () => {
+    try {
+      const response = await axios.get(URI);
+      setCategorias(response.data);
+    } catch (error) {
+      console.error("Error al obtener las categorias:", error);
     }
   };
   return (
@@ -21,47 +26,38 @@ const Categorias = () => {
       <div className="col-sm-3">
         <div className="left-sidebar">
           <h2>Categorías</h2>
-          <div
-            className="panel-group category-products text-left"
-            id="accordian"
-          >
-            {DataCategorias.map((item) => (
-              <div className="panel panel-default" key={item.id}>
-                <div
-                  className="panel-heading"
-                  onClick={() => toggleCategoria(item.categoria)}
-                >
-                  <h4 className="panel-title puntero">
+          <div className="panel-group category-products" id="accordian">
+            {categorias.map((categoria) => (
+              <div className="panel panel-default" key={categoria.id}>
+                <div className="panel-heading">
+                  <h4 className="panel-title">
                     <a
-                      className={
-                        categoriaActiva === item.categoria ? "active" : ""
-                      }
+                      data-toggle="collapse"
+                      data-parent="#accordian"
+                      href={`#${categoria.id}`}
                     >
                       <span className="pull-right">
-                        <i
-                          className={`fa ${
-                            categoriaActiva === item.categoria
-                              ? "fa-minus"
-                              : "fa-plus"
-                          }`}
-                        ></i>{" "}
+                        <i className="fa fa-plus"></i>
                       </span>
-                      {item.categoria}
+                      {categoria.nombre}
                     </a>
                   </h4>
                 </div>
-                <div
-                  className={`panel-collapse collapse ${
-                    categoriaActiva === item.categoria ? "in" : ""
-                  }`}
-                >
+                <div id={categoria.id} className="panel-collapse collapse">
                   <div className="panel-body">
                     <ul>
-                      {item.subcategorias.map((subcategoria, subIndex) => (
-                        <li key={subIndex}>
-                          <a href="#">{subcategoria}</a>
-                        </li>
-                      ))}
+                      <li>
+                        <a href="#">Chaquiras calibradas </a>
+                      </li>
+                      <li>
+                        <a href="#">Chaquiras Chinas </a>
+                      </li>
+                      <li>
+                        <a href="#">Hilo Negro </a>
+                      </li>
+                      <li>
+                        <a href="#">Acero</a>
+                      </li>
                     </ul>
                   </div>
                 </div>
