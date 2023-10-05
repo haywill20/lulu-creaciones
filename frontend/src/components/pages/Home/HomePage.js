@@ -2,10 +2,10 @@ import React from "react";
 import Header from "../../common/Header";
 import TopBar from "../../common/TopBar";
 import Categorias from "../../Categorias";
-import CategoriasTab from "./CategoriasTab";
+import CategoriasTab from "../../CategoriasTab";
 import CardProducto from "../../shared/CardProducto";
-import Recomendados from "./Recomendados";
-import CarouselHome from "./CarouselHome";
+import Recomendados from "../../Recomendados";
+import CarouselHome from "../../CarouselHome";
 import Footer from "../../common/Footer";
 import { productos } from "../../data/DataProductos"; // Importa la lista de productos
 

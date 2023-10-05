@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const sliderImagen = require.context("../../../../uploads", true);
+const sliderImagen = require.context("../../uploads", true);
 
 const URI = "http://localhost:8000/sliders/";
 
