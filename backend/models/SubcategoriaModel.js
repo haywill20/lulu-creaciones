@@ -5,7 +5,7 @@ import db from "../databases/db.js";
 import { DataTypes } from "sequelize";
 
 const SubCategoriaModel = db.define("subcategorias", {
-  id_categorias: { type: DataTypes.STRING },
+  id_categoria: { type: DataTypes.STRING },
   nombre: { type: DataTypes.STRING },
 });
 

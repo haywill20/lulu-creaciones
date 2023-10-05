@@ -4,7 +4,8 @@ import axios from "axios";
 
 const advertisingImagen = require.context("../../uploads", true);
 
-const URI = "http://localhost:8000/categorias/";
+const URIcategorias = "http://localhost:8000/categorias/";
+const URIsubcategorias = "http://localhost:8000/subcategorias/";
 
 const Categorias = () => {
   const [categorias, setCategorias] = useState([]);
@@ -13,14 +14,32 @@ const Categorias = () => {
     getCategorias();
   }, []);
 
+  //metodo para mostrar a todas las categorias
   const getCategorias = async () => {
     try {
-      const response = await axios.get(URI);
+      const response = await axios.get(URIcategorias);
       setCategorias(response.data);
     } catch (error) {
       console.error("Error al obtener las categorias:", error);
     }
   };
+
+  const [subcategorias, setSubCategorias] = useState([]);
+
+  useEffect(() => {
+    getSubCategorias();
+  }, []);
+
+  //metodo para mostrar todas las subcategorias
+  const getSubCategorias = async () => {
+    try {
+      const response = await axios.get(URIsubcategorias);
+      setSubCategorias(response.data);
+    } catch (error) {
+      console.error("Error al obtener las Sub Categorias:", error);
+    }
+  };
+
   return (
     <>
       <div className="col-sm-3">
@@ -37,7 +56,12 @@ const Categorias = () => {
                       href={`#${categoria.id}`}
                     >
                       <span className="pull-right">
-                        <i className="fa fa-plus"></i>
+                        {subcategorias.some(
+                          (subcategoria) =>
+                            subcategoria.id_categoria === categoria.id
+                        ) ? (
+                          <i className="fa fa-plus"></i>
+                        ) : null}
                       </span>
                       {categoria.nombre}
                     </a>
@@ -45,20 +69,18 @@ const Categorias = () => {
                 </div>
                 <div id={categoria.id} className="panel-collapse collapse">
                   <div className="panel-body">
-                    <ul>
-                      <li>
-                        <a href="#">Chaquiras calibradas </a>
-                      </li>
-                      <li>
-                        <a href="#">Chaquiras Chinas </a>
-                      </li>
-                      <li>
-                        <a href="#">Hilo Negro </a>
-                      </li>
-                      <li>
-                        <a href="#">Acero</a>
-                      </li>
-                    </ul>
+                    {subcategorias
+                      .filter(
+                        (subcategoria) =>
+                          subcategoria.id_categoria === categoria.id
+                      )
+                      .map((subcategoria) => (
+                        <ul key={subcategoria.id}>
+                          <li>
+                            <a href="#">{subcategoria.nombre}</a>
+                          </li>
+                        </ul>
+                      ))}
                   </div>
                 </div>
               </div>
