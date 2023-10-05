@@ -11,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/sliders", sliderRoutes);
+app.use("/", sliderRoutes);
 
 try {
   await db.authenticate();
