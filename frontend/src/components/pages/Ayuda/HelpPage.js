@@ -27,24 +27,40 @@ const HelpPage = () => {
                   method="post"
                 >
                   <div className="form-group col-md-12">
-                    <input
-                      type="text"
-                      name="subject"
-                      className="form-control"
-                      required="required"
-                      placeholder="Asunto"
-                    />
+                    <div className="col-sm-6">
+                      <input
+                        type="text"
+                        name="nombre"
+                        className="form-control"
+                        required="required"
+                        placeholder="Nombre"
+                      />
+                    </div>
+                    <div className="col-sm-6">
+                      <input
+                        type="text"
+                        name="correo"
+                        className="form-control"
+                        required="required"
+                        placeholder="correo"
+                      />
+                    </div>
                   </div>
-                  <div className="form-group col-md-12">
-                    <textarea
-                      name="message"
-                      id="message"
-                      required="required"
-                      className="form-control"
-                      rows="8"
-                      placeholder="Escriba su mensaje aqui"
-                    ></textarea>
+
+                  <div className="col-sm-12">
+                    {" "}
+                    <div className="form-group col-md-12">
+                      <textarea
+                        name="message"
+                        id="message"
+                        required="required"
+                        className="form-control"
+                        rows="8"
+                        placeholder="Escriba su mensaje aqui"
+                      ></textarea>
+                    </div>
                   </div>
+
                   <div className="form-group col-md-12">
                     <input
                       type="submit"
