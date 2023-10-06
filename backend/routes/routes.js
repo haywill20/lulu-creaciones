@@ -1,6 +1,9 @@
 import express from "express";
 import { getAllCategorias } from "../controllers/CategoriaController.js";
-import { getAllProductos } from "../controllers/ProductoController.js";
+import {
+  getAllProductos,
+  getProducto,
+} from "../controllers/ProductoController.js";
 import { getAllSliders } from "../controllers/SliderControllers.js";
 import { getAllSubCategorias } from "../controllers/SubCategoriaController.js";
 
@@ -17,5 +20,7 @@ router.get("/subcategorias", getAllSubCategorias);
 
 //ruta para los productos
 router.get("/productos", getAllProductos);
+
+router.get("/productos/:id", getProducto);
 
 export default router;

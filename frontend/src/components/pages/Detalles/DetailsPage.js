@@ -1,39 +1,37 @@
 import react, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Categorias from "../../Categorias";
 import Footer from "../../common/Footer";
 import Header from "../../common/Header";
 import TopBar from "../../common/TopBar";
 import CategoriasTab from "../../CategoriasTab";
 import Recomendados from "../../Recomendados";
+import RecomendadosMini from "../../RecomendadosMini";
 
 const URI = "http://localhost:8000/productos/";
-const recomendadosImagen = require.context(
-  "../../../../uploads/productos",
-  true
-);
+const productosImagen = require.context("../../../../uploads/productos", true);
 
 const DetailsPage = () => {
-  const [productos, setProductos] = useState([]);
+  const [producto, setProducto] = useState({});
+  const { id } = useParams();
+
   useEffect(() => {
-    getProductos();
+    getProducto();
   }, []);
 
-  const getProductos = async () => {
+  //Procedimiento para mostrar un producto
+  const getProducto = async () => {
     try {
-      const response = await axios.get(URI);
-      setProductos(response.data);
+      const res = await axios.get(URI + id);
+
+      setProducto(res.data);
     } catch (error) {
-      console.error("Error al obtener los Productos:", error);
+      console.error("Error al obtener el producto:", error);
     }
   };
 
-  // Dividir los productos en grupos de 3 para mostrar en cada slide
-  const productosPorSlide = [];
-  for (let i = 0; i < productos.length; i += 3) {
-    productosPorSlide.push(productos.slice(i, i + 3));
-  }
   return (
     <>
       <TopBar />
@@ -47,51 +45,21 @@ const DetailsPage = () => {
                 <div className="product-details">
                   <div className="col-sm-5">
                     <div className="view-product">
-                      <div id="image-container"></div>
+                      <img
+                        //aqui se presenta el error
+                        src={
+                          producto.imagen
+                            ? productosImagen(`./${producto.imagen}`)
+                            : ""
+                        }
+                        alt=""
+                      />
+
                       <h3>ZOOM</h3>
                     </div>
 
-                    <div
-                      id="similar-product"
-                      className="carousel slide"
-                      data-ride="carousel"
-                    >
-                      <div className="carousel-inner">
-                        {productosPorSlide.map((productosSlide, index) => (
-                          <div
-                            className={`item ${index === 0 ? "active" : ""}`}
-                            key={index}
-                          >
-                            {productosSlide.map((producto) => (
-                              <a href="" key={producto.id}>
-                                <img
-                                  width={85}
-                                  src={recomendadosImagen(
-                                    `./${producto.imagen}`
-                                  )}
-                                  alt=""
-                                />
-                              </a>
-                            ))}
-                          </div>
-                        ))}
-                      </div>
-
-                      <a
-                        className="left item-control"
-                        href="#similar-product"
-                        data-slide="prev"
-                      >
-                        <i className="fa fa-angle-left"></i>
-                      </a>
-                      <a
-                        className="right item-control"
-                        href="#similar-product"
-                        data-slide="next"
-                      >
-                        <i className="fa fa-angle-right"></i>
-                      </a>
-                    </div>
+                    {/*Recomendados Mini*/}
+                    <RecomendadosMini />
                   </div>
                   <div className="col-sm-7">
                     <div className="product-information">
@@ -100,11 +68,11 @@ const DetailsPage = () => {
                         className="newarrival"
                         alt=""
                       />
-                      <h2>Anne Klein Sleeveless Colorblock Scuba</h2>
-                      <p>COD: 1089772</p>
+                      <h2>{producto.nombre}</h2>
+                      <p>COD: {producto.cod}</p>
                       <img src="images/product-details/rating.png" alt="" />
                       <span>
-                        <span>C$ 59</span>
+                        <span>C$ {producto.precio}</span>
                         <label>Cantidad:</label>
                         <input type="number" />
                         <button type="button" className="btn btn-fefault cart">
@@ -113,13 +81,13 @@ const DetailsPage = () => {
                         </button>
                       </span>
                       <p>
-                        <b>Disponibilidad:</b> In Stock
+                        <b>Disponibilidad:</b> {producto.disponibilidad}
                       </p>
                       <p>
-                        <b>Condición:</b> Nuevo
+                        <b>Condición:</b> {producto.condicion}
                       </p>
                       <p>
-                        <b>Marca:</b> Lúlu
+                        <b>Marca:</b> {producto.marca}
                       </p>
                       <a href="">
                         <img

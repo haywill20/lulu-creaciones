@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 const productoImagen = require.context("../../uploads/productos", true);
 
 const URIcategorias = "http://localhost:8000/categorias/";
@@ -88,12 +89,13 @@ const CategoriasTab = () => {
                       />
                       <h2>{producto.precio}</h2>
                       <p>{producto.nombre}</p>
-                      <a
+                      <Link
+                        to={`/details/${producto.id}`}
                         className="btn btn-default add-to-cart"
                         target={"_blank"}
                       >
                         <i className="fa fa-money"></i>Comprar
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

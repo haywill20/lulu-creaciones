@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 const productImagen = require.context("../../../uploads/productos", true);
 
 const CardProducto = ({ limiteProductos }) => {
@@ -53,9 +54,9 @@ const CardProducto = ({ limiteProductos }) => {
             <div className="choose">
               <ul className="nav nav-pills nav-justified">
                 <li>
-                  <a target={"_blank"}>
+                  <Link to={`/details/${producto.id}`} target={"_blank"}>
                     <i className="fa fa-angle-right"></i>Detalles
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a

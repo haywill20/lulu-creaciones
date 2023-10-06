@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const sliderImagen = require.context("../../uploads", true);
 
@@ -55,11 +56,11 @@ const SectionOneHome = () => {
                         <h1>{item.titulo}</h1>
                         <h2>{item.subtitulo}</h2>
                         <p>{item.parrafo}</p>
-                        <a href="shop.html">
+                        <Link to={`/details/${item.id_producto}`}>
                           <button type="button" className="btn btn-default get">
                             {item.texto_boton}
                           </button>
-                        </a>
+                        </Link>
                       </div>
                       <div className="col-sm-6">
                         <img

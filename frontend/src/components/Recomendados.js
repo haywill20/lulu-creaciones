@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const URI = "http://localhost:8000/productos/";
 const recomendadosImagen = require.context("../../uploads/productos", true);
@@ -49,13 +50,13 @@ const Recomendados = () => {
                         />
                         <h2>{`C$${producto.precio}`}</h2>
                         <p>{producto.nombre}</p>
-                        <a
-                          href={`https://wa.me/+50584024316?text=Hola,%20quisiera%20comprar%20el%20producto%20con%20código:%20${producto.codigo}`}
+                        <Link
+                          to={`/details/${producto.id}`}
                           className="btn btn-default add-to-cart"
                           target="_blank"
                         >
                           <i className="fa fa-money"></i>Comprar
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
