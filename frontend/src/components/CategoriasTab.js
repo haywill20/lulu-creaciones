@@ -1,39 +1,74 @@
-import React, { useState } from "react";
-import { DataCategorias } from "./data/DataCategorias";
-import { productos } from "./data/DataProductos";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+const productoImagen = require.context("../../uploads/productos", true);
 
-const productoImagen = require.context("../../uploads", true);
+const URIcategorias = "http://localhost:8000/categorias/";
+const URIproductos = "http://localhost:8000/productos/";
 
 const CategoriasTab = () => {
-  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(
-    DataCategorias[0].id // Establece la categoría predeterminada
-  );
+  const [categorias, setCategorias] = useState([]);
+  const [productos, setProductos] = useState([]);
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(null);
 
-  // Filtrar los productos por la categoría seleccionada
-  const productosFiltrados = productos
-    .filter((producto) => producto.idCategoria === categoriaSeleccionada)
-    .slice(-4); // Obtener los últimos 4 productos
+  useEffect(() => {
+    getCategorias();
+    getProductos();
+  }, []);
+
+  useEffect(() => {
+    // Asignar la primera categoría como seleccionada inicialmente
+    if (categorias.length > 0) {
+      setCategoriaSeleccionada(categorias[0].id);
+    }
+  }, [categorias]);
+
+  const getCategorias = async () => {
+    try {
+      const response = await axios.get(URIcategorias);
+      setCategorias(response.data);
+    } catch (error) {
+      console.error("Error al obtener las Categorias:", error);
+    }
+  };
+
+  const getProductos = async () => {
+    try {
+      const response = await axios.get(URIproductos);
+      setProductos(response.data);
+    } catch (error) {
+      console.error("Error al obtener los Productos:", error);
+    }
+  };
 
   const handleCategoriaClick = (categoriaId) => {
+    // Actualizar la categoría seleccionada
     setCategoriaSeleccionada(categoriaId);
   };
+
+  const filteredProductos = productos.filter(
+    (producto) =>
+      categoriaSeleccionada === null ||
+      producto.id_categoria === categoriaSeleccionada
+  );
 
   return (
     <>
       <div className="category-tab">
         <div className="col-sm-12">
           <ul className="nav nav-tabs">
-            {DataCategorias.map((item) => (
+            {categorias.map((categoria) => (
               <li
-                className={item.id === categoriaSeleccionada ? "active" : ""}
-                key={item.id}
+                className={
+                  categoria.id === categoriaSeleccionada ? "active" : ""
+                }
+                key={categoria.id}
               >
                 <a
                   className="puntero"
                   data-toggle="tab"
-                  onClick={() => handleCategoriaClick(item.id)}
+                  onClick={() => handleCategoriaClick(categoria.id)}
                 >
-                  {item.categoria}
+                  {categoria.nombre}
                 </a>
               </li>
             ))}
@@ -42,19 +77,18 @@ const CategoriasTab = () => {
 
         <div className="tab-content">
           <div className="tab-pane fade active in" id="tshirt">
-            {productosFiltrados.map((item) => (
-              <div className="col-sm-3" key={item.id}>
+            {filteredProductos.slice(0, 4).map((producto) => (
+              <div className="col-sm-3" key={producto.id}>
                 <div className="product-image-wrapper">
                   <div className="single-products">
                     <div className="productinfo text-center">
                       <img
-                        src={productoImagen(`./${item.imagenName}`)}
+                        src={productoImagen(`./${producto.imagen}`)}
                         alt=""
                       />
-                      <h2>{item.precio}</h2>
-                      <p>{item.nombre}</p>
+                      <h2>{producto.precio}</h2>
+                      <p>{producto.nombre}</p>
                       <a
-                        href={`https://wa.me/+50584024316?text=Hola,%20quisiera%20comprar%20el%20producto%20con%20código:%20${item.codigo}`}
                         className="btn btn-default add-to-cart"
                         target={"_blank"}
                       >

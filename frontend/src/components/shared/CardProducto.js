@@ -1,18 +1,16 @@
 import React from "react";
-import { productos } from "../data/DataProductos";
+const productImagen = require.context("../../../uploads/productos", true);
 
-const productImagen = require.context("../../../uploads", true);
-
-const CardProducto = ({ products }) => {
+const CardProducto = ({ limiteProductos }) => {
   return (
     <>
-      {products.map((producto) => (
+      {limiteProductos.map((producto) => (
         <div className="col-sm-3" key={producto.id}>
           <div className="product-image-wrapper">
             <div className="single-products">
               <div className="productinfo text-center">
                 <img
-                  src={productImagen(`./${producto.imagenName}`)}
+                  src={productImagen(`./${producto.imagen}`)}
                   alt={producto.nombre}
                 />
                 <h2>C${producto.precio}</h2>
@@ -21,12 +19,12 @@ const CardProducto = ({ products }) => {
                 <div className="rating">
                   <div className="stars-wrapper">
                     <div className="rating-text">
-                      {producto.calificacion}{" "}
+                      {producto.valoracion}{" "}
                       {Array.from({ length: 5 }).map((_, index) => (
                         <i
                           key={index}
                           className={`fa-solid fa-star ${
-                            index < Math.floor(producto.calificacion)
+                            index < Math.floor(producto.valoracion)
                               ? "star-yellow"
                               : "star-gray"
                           }`}
@@ -36,21 +34,17 @@ const CardProducto = ({ products }) => {
                   </div>
                 </div>
                 <br />
-                <p>COD: {producto.codigo}</p>
+                <p>COD: {producto.cod}</p>
               </div>
               <div className="product-overlay">
                 <div className="overlay-content productinfo">
                   <img
-                    src={productImagen(`./${producto.subImagen}`)}
+                    src={productImagen(`./${producto.imagen}`)}
                     alt={producto.nombre}
                   />
                   <h2>C${producto.precio}</h2>
                   <p>{producto.nombre}</p>
-                  <a
-                    href={`product-details.html?imagen=images/home/${producto.imagenName}.png`}
-                    className="btn btn-default add-to-cart"
-                    target={"_blank"}
-                  >
+                  <a className="btn btn-default add-to-cart" target={"_blank"}>
                     <i className="fa fa-eye"></i>Ver
                   </a>
                 </div>
@@ -59,10 +53,7 @@ const CardProducto = ({ products }) => {
             <div className="choose">
               <ul className="nav nav-pills nav-justified">
                 <li>
-                  <a
-                    href={`product-details.html?imagen=images/home/${producto.imagenName}.png`}
-                    target={"_blank"}
-                  >
+                  <a target={"_blank"}>
                     <i className="fa fa-angle-right"></i>Detalles
                   </a>
                 </li>

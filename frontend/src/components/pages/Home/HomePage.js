@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../common/Header";
 import TopBar from "../../common/TopBar";
 import Categorias from "../../Categorias";
@@ -7,11 +7,25 @@ import CardProducto from "../../shared/CardProducto";
 import Recomendados from "../../Recomendados";
 import CarouselHome from "../../CarouselHome";
 import Footer from "../../common/Footer";
-import { productos } from "../../data/DataProductos"; // Importa la lista de productos
+import axios from "axios";
+
+const URI = "http://localhost:8000/productos/";
 
 const HomePage = () => {
-  // Mostrar solo los primeros 6 productos en la vista Home
-  const first6Products = productos.slice(0, 8);
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    getProductos();
+  }, []);
+
+  const getProductos = async () => {
+    try {
+      const response = await axios.get(URI);
+      setProductos(response.data);
+    } catch (error) {
+      console.error("Error al obtener los Productos:", error);
+    }
+  };
 
   return (
     <>
@@ -26,7 +40,7 @@ const HomePage = () => {
               <div className="features_items">
                 <h2 className="title text-center">Productos</h2>
                 {/* Pasa la lista de productos a CardProducto */}
-                <CardProducto products={first6Products} />
+                <CardProducto limiteProductos={productos.slice(0, 12)} />{" "}
               </div>
               <CategoriasTab />
               <Recomendados />

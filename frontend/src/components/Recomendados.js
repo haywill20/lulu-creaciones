@@ -1,163 +1,85 @@
-import React, { useState } from "react";
-import { productos } from "./data/DataProductos";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const recomendadosImagen = require.context("../../uploads", true);
+const URI = "http://localhost:8000/productos/";
+const recomendadosImagen = require.context("../../uploads/productos", true);
 
 const Recomendados = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [productos, setProductos] = useState([]);
 
-  const handlePrev = () => {
-    const newIndex =
-      activeIndex - 3 >= 0 ? activeIndex - 3 : productos.length - 3; // Ir al final si estamos en el principio
-    setActiveIndex(newIndex);
+  useEffect(() => {
+    getProductos();
+  }, []);
+
+  const getProductos = async () => {
+    try {
+      const response = await axios.get(URI);
+      setProductos(response.data);
+    } catch (error) {
+      console.error("Error al obtener los Productos:", error);
+    }
   };
 
-  const handleNext = () => {
-    const newIndex = activeIndex + 3 < productos.length ? activeIndex + 3 : 0; // Volver al comienzo si estamos al final
-    setActiveIndex(newIndex);
-  };
+  // Dividir los productos en grupos de 4 para mostrar en cada slide
+  const productosPorSlide = [];
+  for (let i = 0; i < productos.length; i += 4) {
+    productosPorSlide.push(productos.slice(i, i + 4));
+  }
 
   return (
-    <>
-      <div className="recommended_items">
-        <h2 className="title text-center">Productos Recomendados</h2>
+    <div className="recommended_items">
+      <h2 className="title text-center">Productos Recomendados</h2>
 
-        <div
-          id="recommended-item-carousel"
-          className="carousel slide"
-          data-ride="carousel"
-        >
-          <div className="carousel-inner">
-            <div className="item active">
-              <div className="col-sm-4">
-                <div className="product-image-wrapper">
-                  <div className="single-products">
-                    <div className="productinfo text-center">
-                      <img src="images/home/recommend1.png" alt="" />
-                      <h2>C$150</h2>
-                      <p>Collar Black Ghost</p>
-                      <a
-                        href="https://wa.me/+50584024316?text=Hola,%20quisiera%20comprar%20el%20producto%20con%20código:%2047512938"
-                        className="btn btn-default add-to-cart"
-                        target="_blank"
-                      >
-                        <i className="fa fa-money"></i>Comprar
-                      </a>
+      <div
+        id="recommended-item-carousel"
+        className="carousel slide"
+        data-ride="carousel"
+      >
+        <div className="carousel-inner">
+          {productosPorSlide.map((productosSlide, index) => (
+            <div className={`item ${index === 0 ? "active" : ""}`} key={index}>
+              {productosSlide.map((producto) => (
+                <div className="col-sm-3" key={producto.id}>
+                  <div className="product-image-wrapper">
+                    <div className="single-products">
+                      <div className="productinfo text-center">
+                        <img
+                          src={recomendadosImagen(`./${producto.imagen}`)}
+                          alt={producto.nombre}
+                        />
+                        <h2>{`C$${producto.precio}`}</h2>
+                        <p>{producto.nombre}</p>
+                        <a
+                          href={`https://wa.me/+50584024316?text=Hola,%20quisiera%20comprar%20el%20producto%20con%20código:%20${producto.codigo}`}
+                          className="btn btn-default add-to-cart"
+                          target="_blank"
+                        >
+                          <i className="fa fa-money"></i>Comprar
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-sm-4">
-                <div className="product-image-wrapper">
-                  <div className="single-products">
-                    <div className="productinfo text-center">
-                      <img src="images/home/recommend2.png" alt="" />
-                      <h2>C$40</h2>
-                      <p>Aretes Margaritas felices</p>
-                      <a
-                        href="https://wa.me/+50584024316?text=Hola,%20quisiera%20comprar%20el%20producto%20con%20código:%2047512938"
-                        className="btn btn-default add-to-cart"
-                        target="_blank"
-                      >
-                        <i className="fa fa-money"></i>Comprar
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-4">
-                <div className="product-image-wrapper">
-                  <div className="single-products">
-                    <div className="productinfo text-center">
-                      <img src="images/home/recommend3.png" alt="" />
-                      <h2>C$100</h2>
-                      <p>Conjunto Corazones Rojos</p>
-                      <a
-                        href="https://wa.me/+50584024316?text=Hola,%20quisiera%20comprar%20el%20producto%20con%20código:%2047512938"
-                        className="btn btn-default add-to-cart"
-                        target="_blank"
-                      >
-                        <i className="fa fa-money"></i>Comprar
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
-            <div className="item">
-              <div className="col-sm-4">
-                <div className="product-image-wrapper">
-                  <div className="single-products">
-                    <div className="productinfo text-center">
-                      <img src="images/home/recommend4.png" alt="" />
-                      <h2>C$80</h2>
-                      <p>Choker Mariposa</p>
-                      <a
-                        href="https://wa.me/+50584024316?text=Hola,%20quisiera%20comprar%20el%20producto%20con%20código:%2047512938"
-                        className="btn btn-default add-to-cart"
-                        target="_blank"
-                      >
-                        <i className="fa fa-money"></i>Comprar
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-4">
-                <div className="product-image-wrapper">
-                  <div className="single-products">
-                    <div className="productinfo text-center">
-                      <img src="images/home/recommend5.png" alt="" />
-                      <h2>C$40</h2>
-                      <p>Aretes Margaritas felices</p>
-                      <a
-                        href="https://wa.me/+50584024316?text=Hola,%20quisiera%20comprar%20el%20producto%20con%20código:%2047512938"
-                        className="btn btn-default add-to-cart"
-                        target="_blank"
-                      >
-                        <i className="fa fa-money"></i>Comprar
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-4">
-                <div className="product-image-wrapper">
-                  <div className="single-products">
-                    <div className="productinfo text-center">
-                      <img src="images/home/recommend6.png" alt="" />
-                      <h2>C$50</h2>
-                      <p>Pulsera 5Kg</p>
-                      <a
-                        href="https://wa.me/+50584024316?text=Hola,%20quisiera%20comprar%20el%20producto%20con%20código:%2047512938"
-                        className="btn btn-default add-to-cart"
-                        target="_blank"
-                      >
-                        <i className="fa fa-money"></i>Comprar
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <a
-            className="left recommended-item-control"
-            href="#recommended-item-carousel"
-            data-slide="prev"
-          >
-            <i className="fa fa-angle-left"></i>
-          </a>
-          <a
-            className="right recommended-item-control"
-            href="#recommended-item-carousel"
-            data-slide="next"
-          >
-            <i className="fa fa-angle-right"></i>
-          </a>
+          ))}
         </div>
+        <a
+          className="left recommended-item-control"
+          href="#recommended-item-carousel"
+          data-slide="prev"
+        >
+          <i className="fa fa-angle-left"></i>
+        </a>
+        <a
+          className="right recommended-item-control"
+          href="#recommended-item-carousel"
+          data-slide="next"
+        >
+          <i className="fa fa-angle-right"></i>
+        </a>
       </div>
-    </>
+    </div>
   );
 };
 
