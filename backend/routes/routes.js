@@ -27,9 +27,9 @@ router.get("/productos", getAllProductos);
 router.get("/productos/:id", getProducto);
 
 //Metodo para agregar un contacto
-router.post("/contacto", createContacto);
+router.post("/contactos", createContacto);
 
 //Metodo para agregar una ayuda
-router.post("/ayuda", createAyuda);
+router.post("/ayudas", createAyuda);
 
 export default router;

@@ -7,7 +7,7 @@ import ContactoModel from "../models/ContactoModel.js";
 export const createContacto = async (req, res) => {
   try {
     await ContactoModel.create(req.body);
-    res.json({ message: "El contacto se registró correctamente" });
+    res.json({ message: "success" });
   } catch (error) {
     res.json({ message: error.message });
   }
