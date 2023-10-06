@@ -45,9 +45,13 @@ const CardProducto = ({ limiteProductos }) => {
                   />
                   <h2>C${producto.precio}</h2>
                   <p>{producto.nombre}</p>
-                  <a className="btn btn-default add-to-cart" target={"_blank"}>
+                  <Link
+                    to={`/details/${producto.id}`}
+                    className="btn btn-default add-to-cart"
+                    target={"_blank"}
+                  >
                     <i className="fa fa-eye"></i>Ver
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

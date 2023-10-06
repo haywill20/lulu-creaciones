@@ -1,16 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Categorias from "../../Categorias";
 import Header from "../../common/Header";
 import TopBar from "../../common/TopBar";
 import ShopBanner from "./ShopBanner";
 import CardProducto from "../../shared/CardProducto";
 import Footer from "../../common/Footer";
-import { productos } from "../../data/DataProductos";
+import axios from "axios";
+const URI = "http://localhost:8000/productos/";
 
 const ShopPage = () => {
-  // Mostrar solo los primeros 6 productos en la vista Home
-  const first9Products = productos.slice(0, 12);
-  const last9Products = productos.slice(12);
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    getProductos();
+  }, []);
+
+  //Metodo para mostrar todos los productos
+  const getProductos = async () => {
+    try {
+      const response = await axios.get(URI);
+      setProductos(response.data);
+    } catch (error) {
+      console.error("Error al obtener los Productos:", error);
+    }
+  };
   return (
     <>
       <TopBar />
@@ -20,14 +33,18 @@ const ShopPage = () => {
         <div className="container">
           <div className="row">
             <Categorias />
-            <div className="features_items">
-              <h2 className="title text-center">Productos</h2>
-              <CardProducto products={first9Products} />
+            <div className="col-sm-9 padding-right">
+              <div className="features_items">
+                <h2 className="title text-center">Productos</h2>
+                <CardProducto limiteProductos={productos.slice(0, 12)} />
+              </div>
             </div>
           </div>
           <div className="row">
-            <div className="features_items">
-              <CardProducto products={last9Products} />
+            <div className="col-sm-12 padding-right">
+              <div className="features_items">
+                <CardProducto limiteProductos={productos.slice(12)} />
+              </div>
             </div>
           </div>
         </div>
