@@ -41,7 +41,7 @@ const Header = () => {
                     </li>
                     <li className="dropdown">
                       <Link
-                        to={"/shop"}
+                        to={`/shop`}
                         className={
                           location.pathname === "/shop" ? "active" : ""
                         }

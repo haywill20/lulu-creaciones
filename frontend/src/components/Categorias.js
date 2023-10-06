@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import RangoPrecio from "./RangoPrecio";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const advertisingImagen = require.context("../../uploads", true);
 
 const URIcategorias = "http://localhost:8000/categorias/";
 const URIsubcategorias = "http://localhost:8000/subcategorias/";
 
-const Categorias = () => {
+const Categorias = ({ setSelectedSubcategoria }) => {
   const [categorias, setCategorias] = useState([]);
+  const [subcategorias, setSubCategorias] = useState([]);
 
   useEffect(() => {
     getCategorias();
   }, []);
 
-  //metodo para mostrar a todas las categorias
   const getCategorias = async () => {
     try {
       const response = await axios.get(URIcategorias);
@@ -24,13 +25,10 @@ const Categorias = () => {
     }
   };
 
-  const [subcategorias, setSubCategorias] = useState([]);
-
   useEffect(() => {
     getSubCategorias();
   }, []);
 
-  //metodo para mostrar todas las subcategorias
   const getSubCategorias = async () => {
     try {
       const response = await axios.get(URIsubcategorias);
@@ -38,6 +36,10 @@ const Categorias = () => {
     } catch (error) {
       console.error("Error al obtener las Sub Categorias:", error);
     }
+  };
+
+  const handleSubcategoriaClick = (subcategoriaId) => {
+    setSelectedSubcategoria(subcategoriaId);
   };
 
   return (
@@ -77,7 +79,14 @@ const Categorias = () => {
                       .map((subcategoria) => (
                         <ul key={subcategoria.id}>
                           <li>
-                            <a href="#">{subcategoria.nombre}</a>
+                            <div
+                              className="puntero"
+                              onClick={() =>
+                                handleSubcategoriaClick(subcategoria.id)
+                              }
+                            >
+                              {subcategoria.nombre}
+                            </div>
                           </li>
                         </ul>
                       ))}
@@ -89,9 +98,7 @@ const Categorias = () => {
           <div className="shipping text-center">
             <img src={advertisingImagen(`./publicidad1.jpg`)} alt="" />
           </div>
-
           <RangoPrecio />
-
           <div className="shipping text-center">
             <img src={advertisingImagen(`./publicidad2.jpg`)} alt="" />
           </div>

@@ -13,15 +13,25 @@ const URI = "http://localhost:8000/productos/";
 
 const HomePage = () => {
   const [productos, setProductos] = useState([]);
+  const [initialProductCount, setInitialProductCount] = useState(12);
+  const [selectedSubcategoria, setSelectedSubcategoria] = useState(null);
 
   useEffect(() => {
-    getProductos();
-  }, []);
+    getProductos(selectedSubcategoria);
+  }, [selectedSubcategoria]);
 
-  const getProductos = async () => {
+  const getProductos = async (subcategoriaId) => {
     try {
       const response = await axios.get(URI);
-      setProductos(response.data);
+      let filteredProductos = response.data;
+
+      if (subcategoriaId !== null) {
+        filteredProductos = filteredProductos.filter(
+          (producto) => producto.id_subcategoria === subcategoriaId
+        );
+      }
+
+      setProductos(filteredProductos.slice(0, initialProductCount));
     } catch (error) {
       console.error("Error al obtener los Productos:", error);
     }
@@ -35,12 +45,11 @@ const HomePage = () => {
       <section>
         <div className="container">
           <div className="row">
-            <Categorias />
+            <Categorias setSelectedSubcategoria={setSelectedSubcategoria} />
             <div className="col-sm-9 padding-right">
               <div className="features_items">
                 <h2 className="title text-center">Productos</h2>
-                {/* Pasa la lista de productos a CardProducto */}
-                <CardProducto limiteProductos={productos.slice(0, 12)} />{" "}
+                <CardProducto limiteProductos={productos} />
               </div>
               <CategoriasTab />
               <Recomendados />
