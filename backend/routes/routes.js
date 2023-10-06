@@ -1,5 +1,7 @@
 import express from "express";
+import { createAyuda } from "../controllers/AyudaController.js";
 import { getAllCategorias } from "../controllers/CategoriaController.js";
+import { createContacto } from "../controllers/ContactoController.js";
 import {
   getAllProductos,
   getProducto,
@@ -21,6 +23,13 @@ router.get("/subcategorias", getAllSubCategorias);
 //ruta para los productos
 router.get("/productos", getAllProductos);
 
+//ruta para mostrar un unico producto
 router.get("/productos/:id", getProducto);
+
+//Metodo para agregar un contacto
+router.post("/contacto", createContacto);
+
+//Metodo para agregar una ayuda
+router.post("/ayuda", createAyuda);
 
 export default router;
