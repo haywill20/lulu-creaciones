@@ -4,6 +4,7 @@ import ShopPage from "./components/pages/Shop/ShopPage";
 import ContactPage from "./components/pages/Contact/ContactPage";
 import HelpPage from "./components/pages/Ayuda/HelpPage";
 import AboutUs from "./components/pages/Nosotros/AboutUs";
+import DetailsPage from "./components/pages/Detalles/DetailsPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/help" element={<HelpPage />} />
+            <Route path="/details" element={<DetailsPage />} />
           </Routes>
         </BrowserRouter>
       </div>
