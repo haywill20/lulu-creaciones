@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 const productImagen = require.context("../../../uploads/productos", true);
 
 const CardProducto = ({ limiteProductos }) => {
+  const handleComprarClick = (producto) => {
+    const whatsappLink = `https://wa.me/+50584024316?text=Hola,%20quisiera%20comprar%20el%20producto:%20${producto.nombre}%20con%20precio%20%20C$%20${producto.precio}%20con%20código:%20${producto.cod}`;
+    window.open(whatsappLink, "_blank");
+  };
+
   return (
     <>
       {limiteProductos.map((producto) => (
@@ -48,7 +53,6 @@ const CardProducto = ({ limiteProductos }) => {
                   <Link
                     to={`/details/${producto.id}`}
                     className="btn btn-default add-to-cart"
-                    target={"_blank"}
                   >
                     <i className="fa fa-eye"></i>Ver
                   </Link>
@@ -58,15 +62,12 @@ const CardProducto = ({ limiteProductos }) => {
             <div className="choose">
               <ul className="nav nav-pills nav-justified">
                 <li>
-                  <Link to={`/details/${producto.id}`} target={"_blank"}>
+                  <Link to={`/details/${producto.id}`}>
                     <i className="fa fa-angle-right"></i>Detalles
                   </Link>
                 </li>
                 <li>
-                  <a
-                    href={`https://wa.me/+50584024316?text=Hola,%20quisiera%20comprar%20el%20producto%20con%20código:%20${producto.codigo}`}
-                    target={"_blank"}
-                  >
+                  <a href="#" onClick={() => handleComprarClick(producto)}>
                     <i className="fa fa-money"></i>Comprar
                   </a>
                 </li>

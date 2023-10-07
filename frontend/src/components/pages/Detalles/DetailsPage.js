@@ -32,6 +32,11 @@ const DetailsPage = () => {
     }
   };
 
+  const handleComprarClick = (producto) => {
+    const whatsappLink = `https://wa.me/+50584024316?text=Hola,%20quisiera%20comprar%20el%20producto:%20${producto.nombre}%20con%20precio%20C$%20${producto.precio}%20con%20código:%20${producto.cod}`;
+    window.open(whatsappLink, "_blank");
+  };
+
   return (
     <>
       <TopBar />
@@ -75,7 +80,11 @@ const DetailsPage = () => {
                         <span>C$ {producto.precio}</span>
                         <label>Cantidad:</label>
                         <input type="number" />
-                        <button type="button" className="btn btn-fefault cart">
+                        <button
+                          type="button"
+                          className="btn btn-fefault cart"
+                          onClick={() => handleComprarClick(producto)}
+                        >
                           <i className="fa fa-shopping-cart"></i>
                           Comprar
                         </button>
