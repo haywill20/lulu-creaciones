@@ -55,7 +55,7 @@ const Recomendados = () => {
                           className="btn btn-default add-to-cart"
                           target="_blank"
                         >
-                          <i className="fa fa-money"></i>Comprar
+                          <i className="fa fa-money"></i>Ver
                         </Link>
                       </div>
                     </div>
