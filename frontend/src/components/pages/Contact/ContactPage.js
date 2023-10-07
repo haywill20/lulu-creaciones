@@ -124,7 +124,7 @@ const ContactPage = () => {
               <p>
                 ¡Gracias por ponerte en contacto con nosotros!.{" "}
                 <span>
-                  <i class="fa-regular fa-thumbs-up"></i>
+                  <i className="fa-regular fa-thumbs-up"></i>
                 </span>
               </p>
             </div>

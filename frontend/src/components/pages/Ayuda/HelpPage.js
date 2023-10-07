@@ -132,7 +132,7 @@ const HelpPage = () => {
                         Pronto nos podremos en contacto contigo para darte
                         soporte{" "}
                         <span>
-                          <i class="fa-regular fa-thumbs-up"></i>
+                          <i className="fa-regular fa-thumbs-up"></i>
                         </span>
                       </p>
                     </div>
