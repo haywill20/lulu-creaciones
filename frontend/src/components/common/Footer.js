@@ -1,6 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+const URI = "http://localhost:8000/suscripciones/";
 
 const Footer = () => {
+  const [correo, setCorreo] = useState("");
+  const [showModal, setShowModal] = useState(false);
+
+  const suscripcion = async (e) => {
+    e.preventDefault();
+
+    await axios.post(URI, {
+      correo: correo,
+    });
+
+    //Mostrar la ventana modal
+    setShowModal(true);
+
+    //limpiar el campo de suscripcino
+    setCorreo("");
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <>
       <footer id="footer">
@@ -100,8 +123,13 @@ const Footer = () => {
               <div className="col-sm-3 col-sm-offset-1">
                 <div className="single-widget">
                   <h2>Suscríbete</h2>
-                  <form action="#" className="searchform">
-                    <input type="text" placeholder="Su dirección de correo" />
+                  <form onSubmit={suscripcion} className="searchform">
+                    <input
+                      type="text"
+                      placeholder="Su dirección de correo"
+                      value={correo}
+                      onChange={(e) => setCorreo(e.target.value)}
+                    />
                     <button type="submit" className="btn btn-default">
                       <i className="fa-regular fa-circle-right"></i>{" "}
                     </button>
@@ -131,6 +159,47 @@ const Footer = () => {
                   <i className="fa-brands fa-square-facebook"></i>
                 </a>
               </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Ventana modal */}
+        <div
+          className={`modal fade ${showModal ? "in" : ""}`}
+          id="successModal"
+          role="dialog"
+          style={{ display: showModal ? "block" : "none" }}
+        >
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button type="button" className="close" onClick={closeModal}>
+                  &times;
+                </button>
+                <h4 className="modal-title">¡Gracias por suscribirte!</h4>
+              </div>
+              <div className="modal-body">
+                <p>
+                  ¡Bienvenido y gracias por suscribirte a Lúlu Creaciones!
+                  Estamos emocionados de tenerte como parte de nuestra
+                  comunidad. Tu apoyo es fundamental y estamos ansiosos por
+                  compartir contenido, actualizaciones y experiencias increíbles
+                  contigo. ¡Gracias por confiar en Lúlu creaciones y unirte a
+                  este emocionante viaje!{" "}
+                  <span>
+                    <i className="fa-regular fa-thumbs-up"></i>
+                  </span>
+                </p>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-default"
+                  onClick={closeModal}
+                >
+                  Cerrar
+                </button>
+              </div>
             </div>
           </div>
         </div>
