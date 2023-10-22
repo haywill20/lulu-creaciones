@@ -26,10 +26,10 @@ router.get("/productos", getAllProductos);
 //ruta para mostrar un unico producto
 router.get("/productos/:id", getProducto);
 
-//Metodo para agregar un contacto
+//ruta para agregar un contacto
 router.post("/contactos", createContacto);
 
-//Metodo para agregar una ayuda
+//ruta para agregar una ayuda
 router.post("/ayudas", createAyuda);
 
 export default router;
