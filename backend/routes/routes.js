@@ -8,6 +8,7 @@ import {
 } from "../controllers/ProductoController.js";
 import { getAllSliders } from "../controllers/SliderControllers.js";
 import { getAllSubCategorias } from "../controllers/SubCategoriaController.js";
+import { createSuscripcion } from "../controllers/SuscripcionesController.js";
 
 const router = express.Router();
 
@@ -31,5 +32,8 @@ router.post("/contactos", createContacto);
 
 //ruta para agregar una ayuda
 router.post("/ayudas", createAyuda);
+
+//ruta para agregar una suscripcion
+router.post("/suscripciones", createSuscripcion);
 
 export default router;
