@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Menu() {
   return (
@@ -254,14 +255,14 @@ function Menu() {
           <div className="menu-container flex-grow-1">
             <ul id="menu" className="menu">
               <li>
-                <a href="Dashboard.html">
+                <Link to={"/"}>
                   <i
                     data-acorn-icon="shop"
                     className="icon"
                     data-acorn-size={18}
                   />
                   <span className="label">Dashboard</span>
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#products" data-href="Products.html">
@@ -274,9 +275,9 @@ function Menu() {
                 </a>
                 <ul id="products">
                   <li>
-                    <a href="Products.List.html">
+                    <Link to={"/products"}>
                       <span className="label">List</span>
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <a href="Products.Detail.html">
