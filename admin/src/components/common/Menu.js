@@ -8,12 +8,12 @@ function Menu() {
         <div className="nav-content d-flex">
           {/* Logo Start */}
           <div className="logo position-relative">
-            <a href="Dashboard.html">
+            <Link to={"/"}>
               {/* Logo can be added directly */}
               {/* <img src="img/logo/logo-white.svg" alt="logo" /> */}
               {/* Or added via css to provide different ones for different color themes */}
               <div className="img" />
-            </a>
+            </Link>
           </div>
           {/* Logo End */}
           {/* User Menu Start */}
@@ -30,7 +30,7 @@ function Menu() {
                 alt="profile"
                 src="img/profile/profile-1.webp"
               />
-              <div className="name">Zayn Hartley</div>
+              <div className="name">Deborah</div>
             </a>
             <div className="dropdown-menu dropdown-menu-end user-menu wide">
               <div className="row mb-3 ms-0 me-0">
@@ -147,15 +147,6 @@ function Menu() {
           {/* Icons Menu Start */}
           <ul className="list-unstyled list-inline text-center menu-icons">
             <li className="list-inline-item">
-              <a
-                href="#"
-                data-bs-toggle="modal"
-                data-bs-target="#searchPagesModal"
-              >
-                <i data-acorn-icon="search" data-acorn-size={18} />
-              </a>
-            </li>
-            <li className="list-inline-item">
               <a href="#" id="pinButton" className="pin-button">
                 <i
                   data-acorn-icon="lock-on"
@@ -183,72 +174,6 @@ function Menu() {
                 />
               </a>
             </li>
-            <li className="list-inline-item">
-              <a
-                href="#"
-                data-bs-toggle="dropdown"
-                data-bs-target="#notifications"
-                aria-haspopup="true"
-                aria-expanded="false"
-                className="notification-button"
-              >
-                <div className="position-relative d-inline-flex">
-                  <i data-acorn-icon="bell" data-acorn-size={18} />
-                  <span className="position-absolute notification-dot rounded-xl" />
-                </div>
-              </a>
-              <div
-                className="dropdown-menu dropdown-menu-end wide notification-dropdown scroll-out"
-                id="notifications"
-              >
-                <div className="scroll">
-                  <ul className="list-unstyled border-last-none">
-                    <li className="mb-3 pb-3 border-bottom border-separator-light d-flex">
-                      <img
-                        src="img/profile/profile-1.webp"
-                        className="me-3 sw-4 sh-4 rounded-xl align-self-center"
-                        alt="..."
-                      />
-                      <div className="align-self-center">
-                        <a href="#">Joisse Kaycee just sent a new comment!</a>
-                      </div>
-                    </li>
-                    <li className="mb-3 pb-3 border-bottom border-separator-light d-flex">
-                      <img
-                        src="img/profile/profile-2.webp"
-                        className="me-3 sw-4 sh-4 rounded-xl align-self-center"
-                        alt="..."
-                      />
-                      <div className="align-self-center">
-                        <a href="#">New order received! It is total $147,20.</a>
-                      </div>
-                    </li>
-                    <li className="mb-3 pb-3 border-bottom border-separator-light d-flex">
-                      <img
-                        src="img/profile/profile-3.webp"
-                        className="me-3 sw-4 sh-4 rounded-xl align-self-center"
-                        alt="..."
-                      />
-                      <div className="align-self-center">
-                        <a href="#">
-                          3 items just added to wish list by a user!
-                        </a>
-                      </div>
-                    </li>
-                    <li className="pb-3 pb-3 border-bottom border-separator-light d-flex">
-                      <img
-                        src="img/profile/profile-6.webp"
-                        className="me-3 sw-4 sh-4 rounded-xl align-self-center"
-                        alt="..."
-                      />
-                      <div className="align-self-center">
-                        <a href="#">Kirby Peters just sent a new message!</a>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </li>
           </ul>
           {/* Icons Menu End */}
           {/* Menu Start */}
@@ -267,21 +192,20 @@ function Menu() {
               <li>
                 <a href="#products" data-href="Products.html">
                   <i
-                    data-acorn-icon="cupcake"
-                    className="icon"
+                    className="icon fa-solid fa-boxes-stacked"
                     data-acorn-size={18}
-                  />
+                  ></i>
                   <span className="label">Products</span>
                 </a>
                 <ul id="products">
                   <li>
                     <Link to={"/products"}>
-                      <span className="label">List</span>
+                      <span className="label">Lista</span>
                     </Link>
                   </li>
                   <li>
                     <a href="Products.Detail.html">
-                      <span className="label">Detail</span>
+                      <span className="label">Agregar</span>
                     </a>
                   </li>
                 </ul>
@@ -293,20 +217,8 @@ function Menu() {
                     className="icon"
                     data-acorn-size={18}
                   />
-                  <span className="label">Orders</span>
+                  <span className="label">Pedidos</span>
                 </a>
-                <ul id="orders">
-                  <li>
-                    <a href="Orders.List.html">
-                      <span className="label">List</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="Orders.Detail.html">
-                      <span className="label">Detail</span>
-                    </a>
-                  </li>
-                </ul>
               </li>
               <li>
                 <a href="#customers" data-href="Customers.html">
@@ -315,20 +227,27 @@ function Menu() {
                     className="icon"
                     data-acorn-size={18}
                   />
-                  <span className="label">Customers</span>
+                  <span className="label">Clientes</span>
                 </a>
-                <ul id="customers">
-                  <li>
-                    <a href="Customers.List.html">
-                      <span className="label">List</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="Customers.Detail.html">
-                      <span className="label">Detail</span>
-                    </a>
-                  </li>
-                </ul>
+              </li>
+              <li>
+                <a href="#customers" data-href="Customers.html">
+                  <i
+                    data-acorn-icon="tag"
+                    className="icon"
+                    data-acorn-size={18}
+                  />
+                  <span className="label">Banners</span>
+                </a>
+              </li>
+              <li>
+                <a href="#customers" data-href="Customers.html">
+                  <i
+                    className="fa-solid fa-list-ul icon"
+                    data-acorn-size={18}
+                  ></i>
+                  <span className="label">Categorias</span>
+                </a>
               </li>
               <li>
                 <a href="#storefront" data-href="Storefront.html">
@@ -337,64 +256,17 @@ function Menu() {
                     className="icon"
                     data-acorn-size={18}
                   />
-                  <span className="label">Storefront</span>
-                </a>
-                <ul id="storefront">
-                  <li>
-                    <a href="Storefront.Home.html">
-                      <span className="label">Home</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="Storefront.Filters.html">
-                      <span className="label">Filters</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="Storefront.Categories.html">
-                      <span className="label">Categories</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="Storefront.Detail.html">
-                      <span className="label">Detail</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="Storefront.Cart.html">
-                      <span className="label">Cart</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="Storefront.Checkout.html">
-                      <span className="label">Checkout</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="Storefront.Invoice.html">
-                      <span className="label">Invoice</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="Shipping.html">
-                  <i
-                    data-acorn-icon="shipping"
-                    className="icon"
-                    data-acorn-size={18}
-                  />
-                  <span className="label">Shipping</span>
+                  <span className="label">Contactos</span>
                 </a>
               </li>
+
               <li>
                 <a href="Discount.html">
                   <i
-                    data-acorn-icon="tag"
-                    className="icon"
+                    class="icon fa-solid fa-circle-question"
                     data-acorn-size={18}
-                  />
-                  <span className="label">Discount</span>
+                  ></i>
+                  <span className="label">Ayudas</span>
                 </a>
               </li>
               <li>
@@ -404,7 +276,7 @@ function Menu() {
                     className="icon"
                     data-acorn-size={18}
                   />
-                  <span className="label">Settings</span>
+                  <span className="label">Configuracion</span>
                 </a>
               </li>
             </ul>
