@@ -3,12 +3,16 @@ import RangoPrecio from "./RangoPrecio";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const advertisingImagen = require.context("../../uploads", true);
+const advertisingImagen = require.context("../../../backend/uploads", true);
 
 const URIcategorias = "http://localhost:8000/categorias/";
 const URIsubcategorias = "http://localhost:8000/subcategorias/";
 
-const Categorias = ({ setSelectedSubcategoria, setSelectedSubcategoriaNombre, setSelectedCategoriaId }) => {
+const Categorias = ({
+  setSelectedSubcategoria,
+  setSelectedSubcategoriaNombre,
+  setSelectedCategoriaId,
+}) => {
   const [categorias, setCategorias] = useState([]);
   const [subcategorias, setSubCategorias] = useState([]);
   //const [selectedSubcategoriaNombre, setSelectedSubcategoriaNombre] = useState(""); // Estado para almacenar subcategoriaNombre
@@ -39,7 +43,11 @@ const Categorias = ({ setSelectedSubcategoria, setSelectedSubcategoriaNombre, se
     }
   };
 
-  const handleSubcategoriaClick = (subcategoriaId, subcategoriaNombre, categoriaId) => {
+  const handleSubcategoriaClick = (
+    subcategoriaId,
+    subcategoriaNombre,
+    categoriaId
+  ) => {
     setSelectedSubcategoria(subcategoriaId);
     setSelectedSubcategoriaNombre(subcategoriaNombre);
     setSelectedCategoriaId(categoriaId);
@@ -85,7 +93,11 @@ const Categorias = ({ setSelectedSubcategoria, setSelectedSubcategoriaNombre, se
                             <div
                               className="puntero"
                               onClick={() =>
-                                handleSubcategoriaClick(subcategoria.id, subcategoria.nombre, subcategoria.id_categoria)
+                                handleSubcategoriaClick(
+                                  subcategoria.id,
+                                  subcategoria.nombre,
+                                  subcategoria.id_categoria
+                                )
                               }
                             >
                               {subcategoria.nombre}

@@ -1,8 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../../common/Footer";
 import Menu from "../../common/Menu";
+import axios from "axios";
+
+const URI = "http://localhost:8000/productos/";
+const productImagen = require.context(
+  "../../../../../frontend/uploads/productos",
+  true
+);
 
 function Products() {
+  const [productos, setProductos] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  useEffect(() => {
+    getProductos();
+  }, []);
+
+  // Procedimiento para mostrar todos los productos
+  const getProductos = async () => {
+    try {
+      const res = await axios.get(URI);
+      setProductos(res.data);
+    } catch (error) {
+      console.error("Error al obtener los Productos:", error);
+    }
+  };
+
+  // Calcula los productos a mostrar en la página actual
+  const indexOfLastProduct = currentPage * itemsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
+  const currentProducts = productos.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  // Cambia a la siguiente página
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <>
       <Menu />{" "}
@@ -14,15 +52,8 @@ function Products() {
               {/* Title Start */}
               <div className="col-auto mb-3 mb-md-0 me-auto">
                 <div className="w-auto sw-md-30">
-                  <a
-                    href="#"
-                    className="muted-link pb-1 d-inline-block breadcrumb-back"
-                  >
-                    <i data-acorn-icon="chevron-left" data-acorn-size={13} />
-                    <span className="text-small align-middle">Home</span>
-                  </a>
                   <h1 className="mb-0 pb-0 display-4" id="title">
-                    Product List
+                    Lista de productos
                   </h1>
                 </div>
               </div>
@@ -35,7 +66,7 @@ function Products() {
                   className="btn btn-outline-primary btn-icon btn-icon-start ms-0 ms-sm-1 w-100 w-md-auto"
                 >
                   <i data-acorn-icon="plus" />
-                  <span>Add Product</span>
+                  <span>Añadir Producto</span>
                 </button>
                 <div className="dropdown d-inline-block d-lg-none">
                   <button
@@ -50,60 +81,29 @@ function Products() {
                   </button>
                   <div className="dropdown-menu dropdown-menu-end custom-sort">
                     <a className="dropdown-item sort" data-sort="name" href="#">
-                      Title
+                      Nombre
                     </a>
                     <a
                       className="dropdown-item sort"
                       data-sort="email"
                       href="#"
                     >
-                      Stock
+                      Estado
                     </a>
                     <a
                       className="dropdown-item sort"
                       data-sort="phone"
                       href="#"
                     >
-                      Price
+                      Precio
                     </a>
                     <a
                       className="dropdown-item sort"
                       data-sort="group"
                       href="#"
                     >
-                      Status
+                      Disponibilidad
                     </a>
-                  </div>
-                </div>
-                <div className="btn-group ms-1 check-all-container-checkbox-click">
-                  <div
-                    className="btn btn-outline-primary btn-custom-control p-0 ps-3 pe-2"
-                    data-target="#checkboxTable"
-                  >
-                    <span className="form-check float-end">
-                      <input
-                        type="checkbox"
-                        className="form-check-input"
-                        id="checkAll"
-                      />
-                    </span>
-                  </div>
-                  <button
-                    type="button"
-                    className="btn btn-outline-primary dropdown-toggle dropdown-toggle-split"
-                    data-bs-offset="0,3"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  />
-                  <div className="dropdown-menu dropdown-menu-end">
-                    <button
-                      className="dropdown-item"
-                      id="deleteChecked"
-                      type="button"
-                    >
-                      Delete
-                    </button>
                   </div>
                 </div>
               </div>
@@ -229,7 +229,7 @@ function Products() {
                               className="text-muted text-small cursor-pointer sort"
                               data-sort="name"
                             >
-                              TITLE
+                              NOMBRE
                             </div>
                           </div>
                           <div className="col-lg-2 d-flex flex-column pe-1 justify-content-center">
@@ -237,7 +237,7 @@ function Products() {
                               className="text-muted text-small cursor-pointer sort"
                               data-sort="email"
                             >
-                              STOCK
+                              ESTADO
                             </div>
                           </div>
                           <div className="col-lg-3 d-flex flex-column pe-1 justify-content-center">
@@ -245,7 +245,7 @@ function Products() {
                               className="text-muted text-small cursor-pointer sort"
                               data-sort="phone"
                             >
-                              PRICE
+                              PRECIO
                             </div>
                           </div>
                           <div className="col-lg-2 d-flex flex-column pe-1 justify-content-center">
@@ -253,7 +253,7 @@ function Products() {
                               className="text-muted text-small cursor-pointer sort"
                               data-sort="group"
                             >
-                              STATUS
+                              DISPONIBILIDAD
                             </div>
                           </div>
                         </div>
@@ -262,467 +262,62 @@ function Products() {
                   </div>
                 </div>
                 {/* Items Container Start */}
-                <div className="card mb-2">
-                  <div className="row g-0 h-100 sh-lg-9 position-relative">
-                    <a
-                      href="Products.Detail.html"
-                      className="col-auto position-relative"
-                    >
-                      <img
-                        src="img/product/small/product-1.webp"
-                        alt="product"
-                        className="card-img card-img-horizontal sw-11 h-100"
-                      />
-                    </a>
-                    <div className="col py-4 py-lg-0">
-                      <div className="ps-5 pe-4 h-100">
-                        <div className="row g-0 h-100 align-content-center">
-                          <a
-                            href="Products.Detail.html"
-                            className="col-11 col-lg-4 d-flex flex-column mb-lg-0 mb-3 pe-3 d-flex order-1 h-lg-100 justify-content-center"
-                          >
-                            Wooden Animal Toys
-                            <div className="text-small text-muted text-truncate position">
-                              #2342
-                            </div>
-                          </a>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-3">
-                            <div className="lh-1 text-alternate">2.511</div>
-                          </div>
-                          <div className="col-12 col-lg-3 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-4">
-                            <div className="lh-1 text-alternate">$ 62.20</div>
-                          </div>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 align-items-start justify-content-center order-5">
-                            <span className="badge bg-outline-primary group">
-                              SALE
-                            </span>
-                          </div>
-                          <div className="col-1 d-flex flex-column mb-2 mb-lg-0 align-items-end order-2 order-lg-last justify-content-lg-center">
-                            <label className="form-check mt-2">
-                              <input
-                                type="checkbox"
-                                className="form-check-input pe-none"
-                              />
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="card mb-2">
-                  <div className="row g-0 h-100 sh-lg-9 position-relative">
-                    <a
-                      href="Products.Detail.html"
-                      className="col-auto position-relative"
-                    >
-                      <img
-                        src="img/product/small/product-2.webp"
-                        alt="product"
-                        className="card-img card-img-horizontal sw-11 h-100"
-                      />
-                    </a>
-                    <div className="col py-4 py-lg-0">
-                      <div className="ps-5 pe-4 h-100">
-                        <div className="row g-0 h-100 align-content-center">
-                          <a
-                            href="Products.Detail.html"
-                            className="col-11 col-lg-4 d-flex flex-column mb-lg-0 mb-3 pe-3 d-flex order-1 h-lg-100 justify-content-center"
-                          >
-                            Aromatic Green Candle
-                            <div className="text-small text-muted text-truncate position">
-                              #2567
-                            </div>
-                          </a>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-3">
-                            <div className="lh-1 text-alternate">352</div>
-                          </div>
-                          <div className="col-12 col-lg-3 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-4">
-                            <div className="lh-1 text-alternate">$ 41.15</div>
-                          </div>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 align-items-start justify-content-center order-5">
-                            <span className="badge bg-outline-primary group">
-                              SALE
-                            </span>
-                          </div>
-                          <div className="col-1 d-flex flex-column mb-2 mb-lg-0 align-items-end order-2 order-lg-last justify-content-lg-center">
-                            <label className="form-check mt-2">
-                              <input
-                                type="checkbox"
-                                className="form-check-input pe-none"
-                              />
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="card mb-2">
-                  <div className="row g-0 h-100 sh-lg-9 position-relative">
-                    <a
-                      href="Products.Detail.html"
-                      className="col-auto position-relative"
-                    >
-                      <img
-                        src="img/product/small/product-3.webp"
-                        alt="product"
-                        className="card-img card-img-horizontal sw-11 h-100"
-                      />
-                    </a>
-                    <div className="col py-4 py-lg-0">
-                      <div className="ps-5 pe-4 h-100">
-                        <div className="row g-0 h-100 align-content-center">
-                          <a
-                            href="Products.Detail.html"
-                            className="col-11 col-lg-4 d-flex flex-column mb-lg-0 mb-3 pe-3 d-flex order-1 h-lg-100 justify-content-center"
-                          >
-                            Good Glass Teapot
-                            <div className="text-small text-muted text-truncate position">
-                              #1831
-                            </div>
-                          </a>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-3">
-                            <div className="lh-1 text-alternate">1.531</div>
-                          </div>
-                          <div className="col-12 col-lg-3 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-4">
-                            <div className="lh-1 text-alternate">$ 7.50</div>
-                          </div>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 align-items-start justify-content-center order-5" />
-                          <div className="col-1 d-flex flex-column mb-2 mb-lg-0 align-items-end order-2 order-lg-last justify-content-lg-center">
-                            <label className="form-check mt-2">
-                              <input
-                                type="checkbox"
-                                className="form-check-input pe-none"
-                              />
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="card mb-2">
-                  <div className="row g-0 h-100 sh-lg-9 position-relative">
-                    <a
-                      href="Products.Detail.html"
-                      className="col-auto position-relative"
-                    >
-                      <img
-                        src="img/product/small/product-4.webp"
-                        alt="product"
-                        className="card-img card-img-horizontal sw-11 h-100"
-                      />
-                    </a>
-                    <div className="col py-4 py-lg-0">
-                      <div className="ps-5 pe-4 h-100">
-                        <div className="row g-0 h-100 align-content-center">
-                          <a
-                            href="Products.Detail.html"
-                            className="col-11 col-lg-4 d-flex flex-column mb-lg-0 mb-3 pe-3 d-flex order-1 h-lg-100 justify-content-center"
-                          >
-                            Modern Dark Pot
-                            <div className="text-small text-muted text-truncate position">
-                              #1558
-                            </div>
-                          </a>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-3">
-                            <div className="lh-1 text-alternate">729</div>
-                          </div>
-                          <div className="col-12 col-lg-3 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-4">
-                            <div className="lh-1 text-alternate">$ 18.00</div>
-                          </div>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 align-items-start justify-content-center order-5" />
-                          <div className="col-1 d-flex flex-column mb-2 mb-lg-0 align-items-end order-2 order-lg-last justify-content-lg-center">
-                            <label className="form-check mt-2">
-                              <input
-                                type="checkbox"
-                                className="form-check-input pe-none"
-                              />
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="card mb-2">
-                  <div className="row g-0 h-100 sh-lg-9 position-relative">
-                    <a
-                      href="Products.Detail.html"
-                      className="col-auto position-relative"
-                    >
-                      <img
-                        src="img/product/small/product-5.webp"
-                        alt="product"
-                        className="card-img card-img-horizontal sw-11 h-100"
-                      />
-                    </a>
-                    <div className="col py-4 py-lg-0">
-                      <div className="ps-5 pe-4 h-100">
-                        <div className="row g-0 h-100 align-content-center">
-                          <a
-                            href="Products.Detail.html"
-                            className="col-11 col-lg-4 d-flex flex-column mb-lg-0 mb-3 pe-3 d-flex order-1 h-lg-100 justify-content-center"
-                          >
-                            Wood Handle Hunter Knife
-                            <div className="text-small text-muted text-truncate position">
-                              917
-                            </div>
-                          </a>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-3">
-                            <div className="lh-1 text-alternate">16</div>
-                          </div>
-                          <div className="col-12 col-lg-3 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-4">
-                            <div className="lh-1 text-alternate">$ 21.75</div>
-                          </div>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 align-items-start justify-content-center order-5">
-                            <span className="badge bg-outline-quaternary group">
-                              LOW STOCK
-                            </span>
-                          </div>
-                          <div className="col-1 d-flex flex-column mb-2 mb-lg-0 align-items-end order-2 order-lg-last justify-content-lg-center">
-                            <label className="form-check mt-2">
-                              <input
-                                type="checkbox"
-                                className="form-check-input pe-none"
-                              />
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="card mb-2">
-                  <div className="row g-0 h-100 sh-lg-9 position-relative">
-                    <a
-                      href="Products.Detail.html"
-                      className="col-auto position-relative"
-                    >
-                      <img
-                        src="img/product/small/product-6.webp"
-                        alt="product"
-                        className="card-img card-img-horizontal sw-11 h-100"
-                      />
-                    </a>
-                    <div className="col py-4 py-lg-0">
-                      <div className="ps-5 pe-4 h-100">
-                        <div className="row g-0 h-100 align-content-center">
-                          <a
-                            href="Products.Detail.html"
-                            className="col-11 col-lg-4 d-flex flex-column mb-lg-0 mb-3 pe-3 d-flex order-1 h-lg-100 justify-content-center"
-                          >
-                            Wireless On-Ear Headphones
-                            <div className="text-small text-muted text-truncate position">
-                              #5622
-                            </div>
-                          </a>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-3">
-                            <div className="lh-1 text-alternate">592</div>
-                          </div>
-                          <div className="col-12 col-lg-3 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-4">
-                            <div className="lh-1 text-alternate">$ 52.50</div>
-                          </div>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 align-items-start justify-content-center order-5" />
-                          <div className="col-1 d-flex flex-column mb-2 mb-lg-0 align-items-end order-2 order-lg-last justify-content-lg-center">
-                            <label className="form-check mt-2">
-                              <input
-                                type="checkbox"
-                                className="form-check-input pe-none"
-                              />
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="card mb-2">
-                  <div className="row g-0 h-100 sh-lg-9 position-relative">
-                    <a
-                      href="Products.Detail.html"
-                      className="col-auto position-relative"
-                    >
-                      <img
-                        src="img/product/small/product-7.webp"
-                        alt="product"
-                        className="card-img card-img-horizontal sw-11 h-100"
-                      />
-                    </a>
-                    <div className="col py-4 py-lg-0">
-                      <div className="ps-5 pe-4 h-100">
-                        <div className="row g-0 h-100 align-content-center">
-                          <a
-                            href="Products.Detail.html"
-                            className="col-11 col-lg-4 d-flex flex-column mb-lg-0 mb-3 pe-3 d-flex order-1 h-lg-100 justify-content-center"
-                          >
-                            White Coffee Mug
-                            <div className="text-small text-muted text-truncate position">
-                              #3457
-                            </div>
-                          </a>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-3">
-                            <div className="lh-1 text-alternate">2.849</div>
-                          </div>
-                          <div className="col-12 col-lg-3 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-4">
-                            <div className="lh-1 text-alternate">$ 14.10</div>
-                          </div>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 align-items-start justify-content-center order-5" />
-                          <div className="col-1 d-flex flex-column mb-2 mb-lg-0 align-items-end order-2 order-lg-last justify-content-lg-center">
-                            <label className="form-check mt-2">
-                              <input
-                                type="checkbox"
-                                className="form-check-input pe-none"
-                              />
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="card mb-2">
-                  <div className="row g-0 h-100 sh-lg-9 position-relative">
-                    <a
-                      href="Products.Detail.html"
-                      className="col-auto position-relative"
-                    >
-                      <img
-                        src="img/product/small/product-8.webp"
-                        alt="product"
-                        className="card-img card-img-horizontal sw-11 h-100"
-                      />
-                    </a>
-                    <div className="col py-4 py-lg-0">
-                      <div className="ps-5 pe-4 h-100">
-                        <div className="row g-0 h-100 align-content-center">
-                          <a
-                            href="Products.Detail.html"
-                            className="col-11 col-lg-4 d-flex flex-column mb-lg-0 mb-3 pe-3 d-flex order-1 h-lg-100 justify-content-center"
-                          >
-                            Geometric Chandelier
-                            <div className="text-small text-muted text-truncate position">
-                              #4832
-                            </div>
-                          </a>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-3">
-                            <div className="lh-1 text-alternate">902</div>
-                          </div>
-                          <div className="col-12 col-lg-3 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-4">
-                            <div className="lh-1 text-alternate">$ 32.60</div>
-                          </div>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 align-items-start justify-content-center order-5">
-                            <span className="badge bg-outline-secondary group">
-                              NEW
-                            </span>
-                          </div>
-                          <div className="col-1 d-flex flex-column mb-2 mb-lg-0 align-items-end order-2 order-lg-last justify-content-lg-center">
-                            <label className="form-check mt-2">
-                              <input
-                                type="checkbox"
-                                className="form-check-input pe-none"
-                              />
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="card mb-2">
-                  <div className="row g-0 h-100 sh-lg-9 position-relative">
-                    <a
-                      href="Products.Detail.html"
-                      className="col-auto position-relative"
-                    >
-                      <img
-                        src="img/product/small/product-9.webp"
-                        alt="product"
-                        className="card-img card-img-horizontal sw-11 h-100"
-                      />
-                    </a>
-                    <div className="col py-4 py-lg-0">
-                      <div className="ps-5 pe-4 h-100">
-                        <div className="row g-0 h-100 align-content-center">
-                          <a
-                            href="Products.Detail.html"
-                            className="col-11 col-lg-4 d-flex flex-column mb-lg-0 mb-3 pe-3 d-flex order-1 h-lg-100 justify-content-center"
-                          >
-                            XBox Controller
-                            <div className="text-small text-muted text-truncate position">
-                              #2611
-                            </div>
-                          </a>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-3">
-                            <div className="lh-1 text-alternate">614</div>
-                          </div>
-                          <div className="col-12 col-lg-3 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-4">
-                            <div className="lh-1 text-alternate">$ 19.15</div>
-                          </div>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 align-items-start justify-content-center order-5">
-                            <span className="badge bg-outline-secondary group">
-                              NEW
-                            </span>
-                          </div>
-                          <div className="col-1 d-flex flex-column mb-2 mb-lg-0 align-items-end order-2 order-lg-last justify-content-lg-center">
-                            <label className="form-check mt-2">
-                              <input
-                                type="checkbox"
-                                className="form-check-input pe-none"
-                              />
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="card mb-2">
-                  <div className="row g-0 h-100 sh-lg-9 position-relative">
-                    <a
-                      href="Products.Detail.html"
-                      className="col-auto position-relative"
-                    >
-                      <img
-                        src="img/product/small/product-10.webp"
-                        alt="product"
-                        className="card-img card-img-horizontal sw-11 h-100"
-                      />
-                    </a>
-                    <div className="col py-4 py-lg-0">
-                      <div className="ps-5 pe-4 h-100">
-                        <div className="row g-0 h-100 align-content-center">
-                          <a
-                            href="Products.Detail.html"
-                            className="col-11 col-lg-4 d-flex flex-column mb-lg-0 mb-3 pe-3 d-flex order-1 h-lg-100 justify-content-center"
-                          >
-                            Health and Fitness Smartwatch
-                            <div className="text-small text-muted text-truncate position">
-                              #3470
-                            </div>
-                          </a>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-3">
-                            <div className="lh-1 text-alternate">1.852</div>
-                          </div>
-                          <div className="col-12 col-lg-3 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-4">
-                            <div className="lh-1 text-alternate">$ 68.00</div>
-                          </div>
-                          <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 align-items-start justify-content-center order-5" />
-                          <div className="col-1 d-flex flex-column mb-2 mb-lg-0 align-items-end order-2 order-lg-last justify-content-lg-center">
-                            <label className="form-check mt-2">
-                              <input
-                                type="checkbox"
-                                className="form-check-input pe-none"
-                              />
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
                 {/* Items Container Start */}
+                {currentProducts.map((producto) => (
+                  <div className="card mb-2" key={producto.id}>
+                    <div className="row g-0 h-100 sh-lg-11 position-relative">
+                      <a
+                        href="Products.Detail.html"
+                        className="col-auto position-relative"
+                      >
+                        <img
+                          src={productImagen(`./${producto.imagen}`)}
+                          alt="product"
+                          className="card-img card-img-horizontal sw-11 h-100"
+                        />
+                      </a>
+                      <div className="col py-4 py-lg-0">
+                        <div className="ps-5 pe-4 h-100">
+                          <div className="row g-0 h-100 align-content-center">
+                            <a
+                              href="Products.Detail.html"
+                              className="col-11 col-lg-4 d-flex flex-column mb-lg-0 mb-3 pe-3 d-flex order-1 h-lg-100 justify-content-center"
+                            >
+                              {producto.nombre}
+                              <div className="text-small text-muted text-truncate position">
+                                {producto.cod}
+                              </div>
+                            </a>
+                            <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-3">
+                              <div className="lh-1 text-alternate">
+                                {producto.condicion}
+                              </div>
+                            </div>
+                            <div className="col-12 col-lg-3 d-flex flex-column pe-1 mb-2 mb-lg-0 justify-content-center order-4">
+                              <div className="lh-1 text-alternate">
+                                {`C$ ${producto.precio}`}
+                              </div>
+                            </div>
+                            <div className="col-12 col-lg-2 d-flex flex-column pe-1 mb-2 mb-lg-0 align-items-start justify-content-center order-5">
+                              <span className="badge bg-outline-primary group">
+                                {producto.disponibilidad}
+                              </span>
+                            </div>
+                            <div className="col-1 d-flex flex-column mb-2 mb-lg-0 align-items-end order-2 order-lg-last justify-content-lg-center">
+                              <button className="btn">
+                                <i className="icon fa-regular fa-pen-to-square"></i>
+                              </button>
+                              <button className="btn">
+                                <i class="icon fa-regular fa-trash-can"></i>{" "}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {/* Items Container End */}
                 {/* List Items End */}
               </div>
             </div>
@@ -730,35 +325,53 @@ function Products() {
             <div className="w-100 d-flex justify-content-center">
               <nav>
                 <ul className="pagination">
-                  <li className="page-item disabled">
-                    <a
+                  <li
+                    className={`page-item ${
+                      currentPage === 1 ? "disabled" : ""
+                    }`}
+                  >
+                    <button
                       className="page-link shadow"
-                      href="#"
-                      tabIndex={-1}
-                      aria-disabled="true"
+                      onClick={() => paginate(currentPage - 1)}
+                      disabled={currentPage === 1}
                     >
                       <i data-acorn-icon="chevron-left" />
-                    </a>
+                    </button>
                   </li>
-                  <li className="page-item active">
-                    <a className="page-link shadow" href="#">
-                      1
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link shadow" href="#">
-                      2
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link shadow" href="#">
-                      3
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link shadow" href="#">
+                  {Array.from({
+                    length: Math.ceil(productos.length / itemsPerPage),
+                  }).map((_, index) => (
+                    <li
+                      key={index}
+                      className={`page-item ${
+                        currentPage === index + 1 ? "active" : ""
+                      }`}
+                    >
+                      <button
+                        className="page-link shadow"
+                        onClick={() => paginate(index + 1)}
+                      >
+                        {index + 1}
+                      </button>
+                    </li>
+                  ))}
+                  <li
+                    className={`page-item ${
+                      currentPage === Math.ceil(productos.length / itemsPerPage)
+                        ? "disabled"
+                        : ""
+                    }`}
+                  >
+                    <button
+                      className="page-link shadow"
+                      onClick={() => paginate(currentPage + 1)}
+                      disabled={
+                        currentPage ===
+                        Math.ceil(productos.length / itemsPerPage)
+                      }
+                    >
                       <i data-acorn-icon="chevron-right" />
-                    </a>
+                    </button>
                   </li>
                 </ul>
               </nav>

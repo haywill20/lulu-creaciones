@@ -6,6 +6,7 @@ import ThemeSetting from "./components/common/ThemeSetting";
 import Dashboard from "./components/pages/dashboard/Dashboard";
 import Button from "./components/common/Button";
 import Products from "./components/pages/products/Products";
+import ProductAdd from "./components/pages/products/ProductAdd";
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/productAdd" element={<ProductAdd />} />
           </Routes>
         </BrowserRouter>
       </div>

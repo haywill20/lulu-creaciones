@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const productImagen = require.context("../../../uploads/productos", true);
+const productImagen = require.context(
+  "../../../../backend/uploads/productos",
+  true
+);
 
 const CardProducto = ({ limiteProductos }) => {
   const handleComprarClick = (producto) => {

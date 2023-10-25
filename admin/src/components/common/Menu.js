@@ -204,9 +204,9 @@ function Menu() {
                     </Link>
                   </li>
                   <li>
-                    <a href="Products.Detail.html">
+                    <Link to={"/productAdd"}>
                       <span className="label">Agregar</span>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>

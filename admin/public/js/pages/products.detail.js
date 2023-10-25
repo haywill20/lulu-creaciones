@@ -16,48 +16,54 @@ class ProductsDetail {
     if (jQuery().select2) {
       this._initSelect2();
     } else {
-      console.error('[CS] jQuery().select2 is undefined.');
+      console.error("[CS] jQuery().select2 is undefined.");
     }
 
-    if (typeof IMask !== 'undefined') {
+    if (typeof IMask !== "undefined") {
       this._initImask();
     } else {
-      console.error('[CS] IMask is undefined.');
+      console.error("[CS] IMask is undefined.");
     }
 
-    if (typeof Quill !== 'undefined' && typeof Active !== 'undefined') {
+    if (typeof Quill !== "undefined" && typeof Active !== "undefined") {
       this._initQuill();
     } else {
-      console.error('[CS] Quill or Quill.Active Module is undefined.');
+      console.error("[CS] Quill or Quill.Active Module is undefined.");
     }
 
-    if (typeof Tagify !== 'undefined') {
+    if (typeof Tagify !== "undefined") {
       this._initTagify();
     } else {
-      console.error('[CS] Tagify is undefined.');
+      console.error("[CS] Tagify is undefined.");
     }
 
-    if (typeof Dropzone !== 'undefined' && typeof DropzoneTemplates !== 'undefined') {
+    if (
+      typeof Dropzone !== "undefined" &&
+      typeof DropzoneTemplates !== "undefined"
+    ) {
       this._initDropzone();
     } else {
-      console.error('[CS] Dropzone or DropzoneTemplates is undefined.');
+      console.error("[CS] Dropzone or DropzoneTemplates is undefined.");
     }
   }
 
   // Select2 field initialize
   _initSelect2() {
-    jQuery('.select-single-no-search').select2({minimumResultsForSearch: Infinity, placeholder: ''});
+    jQuery(".select-single-no-search").select2({
+      minimumResultsForSearch: Infinity,
+      placeholder: "",
+    });
   }
 
   // mask-currency field initialize
   _initImask() {
-    document.querySelectorAll('.mask-currency').forEach((el) => {
+    document.querySelectorAll(".mask-currency").forEach((el) => {
       IMask(el, {
-        mask: '$ num',
+        mask: "$ num",
         blocks: {
           num: {
             mask: Number,
-            thousandsSeparator: '.',
+            thousandsSeparator: ".",
           },
         },
       });
@@ -66,33 +72,33 @@ class ProductsDetail {
 
   //Quill Editor initialize
   _initQuill() {
-    Quill.register('modules/active', Active);
+    Quill.register("modules/active", Active);
     const quillBubbleToolbarOptions = [
-      ['bold', 'italic', 'underline', 'strike'],
-      [{header: [1, 2, 3, 4, 5, 6, false]}],
-      [{list: 'ordered'}, {list: 'bullet'}],
-      [{align: []}],
+      ["bold", "italic", "underline", "strike"],
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      [{ list: "ordered" }, { list: "bullet" }],
+      [{ align: [] }],
     ];
 
-    if (document.getElementById('quillEditorDetails')) {
-      new Quill('#quillEditorDetails', {
-        modules: {toolbar: quillBubbleToolbarOptions, active: {}},
-        theme: 'bubble',
+    if (document.getElementById("quillEditorDetails")) {
+      new Quill("#quillEditorDetails", {
+        modules: { toolbar: quillBubbleToolbarOptions, active: {} },
+        theme: "bubble",
       });
     }
 
-    if (document.getElementById('quillEditorBubble')) {
-      new Quill('#quillEditorBubble', {
-        modules: {toolbar: quillBubbleToolbarOptions, active: {}},
-        theme: 'bubble',
+    if (document.getElementById("quillEditorBubble")) {
+      new Quill("#quillEditorBubble", {
+        modules: { toolbar: quillBubbleToolbarOptions, active: {} },
+        theme: "bubble",
       });
     }
   }
 
   // Tagify initialization
   _initTagify() {
-    if (document.querySelectorAll('input[name=tagsBasic]').length > 0) {
-      document.querySelectorAll('input[name=tagsBasic]').forEach((el) => {
+    if (document.querySelectorAll("input[name=tagsBasic]").length > 0) {
+      document.querySelectorAll("input[name=tagsBasic]").forEach((el) => {
         new Tagify(el);
       });
     }
@@ -100,63 +106,82 @@ class ProductsDetail {
 
   // Dropzone initialization
   _initDropzone() {
-    if (document.getElementById('dropzoneProductImage')) {
-      new Dropzone('#dropzoneProductImage', {
-        url: 'https://httpbin.org/post',
+    if (document.getElementById("dropzoneProductImage")) {
+      new Dropzone("#dropzoneProductImage", {
+        url: "https://httpbin.org/post",
         thumbnailWidth: 600,
         thumbnailHeight: 430,
         previewTemplate: DropzoneTemplates.columnPreviewImageTemplate,
         init: function () {
-          this.on('success', function (file, responseText) {
+          this.on("success", function (file, responseText) {
             console.log(responseText);
           });
 
           // If you only have access to the original image sizes on your server,
           // and want to resize them in the browser:
-          let mockFile1 = {name: 'cupcake.webp', size: 249430};
-          this.displayExistingFile(mockFile1, 'img/product/small/product-3.webp');
+          let mockFile1 = { name: "cupcake.webp", size: 249430 };
+          this.displayExistingFile(
+            mockFile1,
+            "img/product/small/product-3.webp"
+          );
 
           // Adding dz-started class to remove drop message
-          this.element.classList.add('dz-started');
+          this.element.classList.add("dz-started");
         },
       });
     }
 
-    if (document.getElementById('dropzoneProductGallery')) {
-      new Dropzone('#dropzoneProductGallery', {
-        url: 'https://httpbin.org/post',
+    if (document.getElementById("dropzoneProductGallery")) {
+      new Dropzone("#dropzoneProductGallery", {
+        url: "https://httpbin.org/post",
         thumbnailWidth: 600,
         thumbnailHeight: 430,
         previewTemplate: DropzoneTemplates.columnPreviewImageTemplate,
         init: function () {
-          this.on('success', function (file, responseText) {
+          this.on("success", function (file, responseText) {
             console.log(responseText);
           });
 
           // If you only have access to the original image sizes on your server,
           // and want to resize them in the browser:
-          let mockFile1 = {name: 'cake.webp', size: 203100};
-          this.displayExistingFile(mockFile1, 'img/product/small/product-10.webp');
+          let mockFile1 = { name: "cake.webp", size: 203100 };
+          this.displayExistingFile(
+            mockFile1,
+            "img/product/small/product-10.webp"
+          );
 
-          let mockFile2 = {name: 'bread.webp', size: 267140};
-          this.displayExistingFile(mockFile2, 'img/product/small/product-4.webp');
+          let mockFile2 = { name: "bread.webp", size: 267140 };
+          this.displayExistingFile(
+            mockFile2,
+            "img/product/small/product-4.webp"
+          );
 
-          let mockFile3 = {name: 'cupcake.webp', size: 267140};
-          this.displayExistingFile(mockFile3, 'img/product/small/product-1.webp');
+          let mockFile3 = { name: "cupcake.webp", size: 267140 };
+          this.displayExistingFile(
+            mockFile3,
+            "img/product/small/product-1.webp"
+          );
 
-          let mockFile4 = {name: 'pastry.webp', size: 267140};
-          this.displayExistingFile(mockFile4, 'img/product/small/product-7.webp');
+          let mockFile4 = { name: "pastry.webp", size: 267140 };
+          this.displayExistingFile(
+            mockFile4,
+            "img/product/small/product-7.webp"
+          );
 
           // Adding dz-started class to remove drop message
-          this.element.classList.add('dz-started');
+          this.element.classList.add("dz-started");
         },
       });
 
       // A button to fire a click event from dropzone
-      if (document.getElementById('dropzoneProductGalleryButton')) {
-        document.getElementById('dropzoneProductGalleryButton').addEventListener('click', (event) => {
-          document.getElementById('dropzoneProductGallery').dispatchEvent(new Event('click'));
-        });
+      if (document.getElementById("dropzoneProductGalleryButton")) {
+        document
+          .getElementById("dropzoneProductGalleryButton")
+          .addEventListener("click", (event) => {
+            document
+              .getElementById("dropzoneProductGallery")
+              .dispatchEvent(new Event("click"));
+          });
       }
     }
   }
