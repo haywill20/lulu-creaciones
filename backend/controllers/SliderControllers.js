@@ -24,3 +24,17 @@ export const createSlider = async (req, res) => {
     res.json({ message: error.message });
   }
 };
+
+//Metodo para eliminar un slider
+export const deleteSlider = async (req, res) => {
+  try {
+    await SliderModel.destroy({
+      where: { id: req.params.id },
+    });
+    res.json({
+      message: "¡Slider eliminado correctamente!",
+    });
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};

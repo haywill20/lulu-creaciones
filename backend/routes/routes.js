@@ -9,6 +9,7 @@ import {
 } from "../controllers/ProductoController.js";
 import {
   createSlider,
+  deleteSlider,
   getAllSliders,
 } from "../controllers/SliderControllers.js";
 import { getAllSubCategorias } from "../controllers/SubCategoriaController.js";
@@ -19,6 +20,7 @@ const router = express.Router();
 //ruta para los sliders
 router.get("/sliders", getAllSliders);
 router.post("/createslider", createSlider);
+router.delete("/deleteslider/:id", deleteSlider);
 
 //ruta para las categorias
 router.get("/categorias", getAllCategorias);
