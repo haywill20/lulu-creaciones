@@ -147,8 +147,8 @@ function ProductAdd() {
                       <div className="mb-3 w-100">
                         <label className="form-label">Categoria</label>
                         <select
-                          className="select-single-no-search"
-                          value={selectedCategoria}
+                          className="form-select"
+                          arial-label="Default select example"
                           onChange={handleCategoriaChange}
                         >
                           <option value={0} disabled hidden>
@@ -164,8 +164,8 @@ function ProductAdd() {
                       <div className="mb-3 w-100">
                         <label className="form-label">subcategoria</label>
                         <select
-                          className="select-single-no-search"
-                          value={selectedSubCategoria.id}
+                          className="form-select"
+                          arial-label="Default select example"
                           onChange={handleSubCategoriaChange}
                         >
                           <option value={1} disabled hidden>
@@ -196,8 +196,8 @@ function ProductAdd() {
                       <div className="mb-3 w-100">
                         <label className="form-label">Disponibilidad</label>
                         <select
-                          className="select-single-no-search"
-                          value={disponibilidad}
+                          className="form-select"
+                          arial-label="Default select example"
                           onChange={(e) => setDisponibilidad(e.target.value)}
                         >
                           <option value="En stock" selected>
@@ -206,14 +206,18 @@ function ProductAdd() {
                           <option value="No disponible">No disponible</option>
                         </select>
                       </div>
-                      <div className="mb-3 w-100">
+                      <div className="mb-3 w-100" >
                         <label className="form-label">Condición</label>
                         <select
-                          className="select-single-no-search"
-                          value={condicion}
-                          onChange={(e) => setCondicion(e.target.value)}
+                          className="form-select"
+                          arial-label="Default select example"
+                          //value={condicion}
+                          onChange={(e) => {
+                            setCondicion(e.target.value)
+                            console.log(condicion)
+                            }
+                          }
                         >
-                          <option label="&nbsp;"></option>
                           <option value="Nuevo" selected>
                             Nuevo
                           </option>
@@ -223,8 +227,8 @@ function ProductAdd() {
                       <div className="mb-3 w-100">
                         <label className="form-label">Marca</label>
                         <select
-                          className="select-single-no-search"
-                          value={marca}
+                          className="form-select"
+                          arial-label="Default select example"
                           onChange={(e) => setMarca(e.target.value)}
                         >
                           <option value="Lúlu" selected>
