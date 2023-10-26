@@ -7,7 +7,10 @@ import {
   getAllProductos,
   getProducto,
 } from "../controllers/ProductoController.js";
-import { getAllSliders } from "../controllers/SliderControllers.js";
+import {
+  createSlider,
+  getAllSliders,
+} from "../controllers/SliderControllers.js";
 import { getAllSubCategorias } from "../controllers/SubCategoriaController.js";
 import { createSuscripcion } from "../controllers/SuscripcionesController.js";
 
@@ -15,6 +18,7 @@ const router = express.Router();
 
 //ruta para los sliders
 router.get("/sliders", getAllSliders);
+router.post("/createslider", createSlider);
 
 //ruta para las categorias
 router.get("/categorias", getAllCategorias);

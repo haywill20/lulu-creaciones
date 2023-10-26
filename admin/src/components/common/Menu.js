@@ -231,14 +231,25 @@ function Menu() {
                 </a>
               </li>
               <li>
-                <a href="#customers" data-href="Customers.html">
+                <a href="#sliders" data-href="Products.html">
                   <i
-                    data-acorn-icon="tag"
-                    className="icon"
+                    className="icon fa-solid fa-boxes-stacked"
                     data-acorn-size={18}
-                  />
-                  <span className="label">Banners</span>
+                  ></i>
+                  <span className="label">Sliders</span>
                 </a>
+                <ul id="sliders">
+                  <li>
+                    <Link to={"/sliders"}>
+                      <span className="label">Lista</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to={"/sliderAdd"}>
+                      <span className="label">Agregar</span>
+                    </Link>
+                  </li>
+                </ul>
               </li>
               <li>
                 <a href="#customers" data-href="Customers.html">
