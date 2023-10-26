@@ -5,7 +5,7 @@ import axios from "axios";
 
 const URI = "http://localhost:8000/productos/";
 const productImagen = require.context(
-  "../../../../../frontend/uploads/productos",
+  "../../../../../backend/uploads/productos",
   true
 );
 
@@ -308,7 +308,7 @@ function Products() {
                                 <i className="icon fa-regular fa-pen-to-square"></i>
                               </button>
                               <button className="btn">
-                                <i class="icon fa-regular fa-trash-can"></i>{" "}
+                                <i className="icon fa-regular fa-trash-can"></i>{" "}
                               </button>
                             </div>
                           </div>

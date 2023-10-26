@@ -25,3 +25,15 @@ export const getProducto = async (req, res) => {
     res.json({ message: error.message });
   }
 };
+
+//Metodo para agregar un producto
+export const createProducto = async (req, res) => {
+  try {
+    await ProductoModel.create(req.body);
+    res.json({
+      message: "¡Producto agregado correctamente!",
+    });
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};

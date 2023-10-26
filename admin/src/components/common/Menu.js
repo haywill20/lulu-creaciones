@@ -263,7 +263,7 @@ function Menu() {
               <li>
                 <a href="Discount.html">
                   <i
-                    class="icon fa-solid fa-circle-question"
+                    className="icon fa-solid fa-circle-question"
                     data-acorn-size={18}
                   ></i>
                   <span className="label">Ayudas</span>
