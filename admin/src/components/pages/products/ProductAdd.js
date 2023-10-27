@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState, useRef } from "react";
 import Footer from "../../common/Footer";
 import Menu from "../../common/Menu";
 import axios from "axios";
@@ -8,14 +7,47 @@ const URIcategorias = "http://localhost:8000/categorias/";
 const URIsubcategorias = "http://localhost:8000/subcategorias/";
 const URIproductos = "http://localhost:8000/createproducto/";
 function ProductAdd() {
+  const [isOpenCategoria, setIsOpenCategoria] = useState(false);
+  const dropdownCategoriaRef = useRef(null);
+  const dropdownSubCategoriaRef = useRef(null);
+
   const [nombre, setNombre] = useState("");
   const [categorias, setCategorias] = useState([]);
-  const [selectedCategoria, setSelectedCategoria] = useState(0);
-  const handleCategoriaChange = (e) => {
-    setSelectedCategoria(e.target.value);
+  const [selectedCategoria, setSelectedCategoria] = useState({
+    id: null,
+    name: "",
+  });
+
+  const handleCategoriaClick = (categoria) => {
+    setSelectedCategoria(categoria);
+    setIsOpenCategoria(false);
   };
+
+  const handleClickOutside = (event) => {
+    if (
+      dropdownCategoriaRef.current &&
+      !dropdownCategoriaRef.current.contains(event.target) &&
+      dropdownSubCategoriaRef.current &&
+      !dropdownSubCategoriaRef.current.contains(event.target)
+    ) {
+      setIsOpenCategoria(false);
+      setIsOpenSubCategoria(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const [isOpenSubCategoria, setIsOpenSubCategoria] = useState(false);
   const [subCategorias, setSubCategorias] = useState([]);
-  const [selectedSubCategoria, setSelectedSubCategoria] = useState(0);
+  const [selectedSubCategoria, setSelectedSubCategoria] = useState({
+    id: null,
+    name: "",
+  });
   const [cod, setCod] = useState("");
   const [disponibilidad, setDisponibilidad] = useState("En stock");
   const [condicion, setCondicion] = useState("Nuevo");
@@ -24,6 +56,13 @@ function ProductAdd() {
   const [file, setFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 
+  const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del modal de éxito
+
+  const handleSubCategoriaClick = (subCategoria) => {
+    setSelectedSubCategoria(subCategoria);
+    setIsOpenSubCategoria(false);
+  };
+
   const addProducto = async (e) => {
     e.preventDefault();
 
@@ -31,8 +70,8 @@ function ProductAdd() {
       const formData = new FormData();
       formData.append("imagen", file);
       formData.append("nombre", nombre);
-      formData.append("categoria", selectedCategoria);
-      formData.append("subCategoria", selectedSubCategoria);
+      formData.append("id_categoria", selectedCategoria.id);
+      formData.append("id_subcategoria", selectedSubCategoria.id);
       formData.append("cod", cod);
       formData.append("disponibilidad", disponibilidad);
       formData.append("condicion", condicion);
@@ -54,11 +93,25 @@ function ProductAdd() {
       setPrecio("");
       setFile(null);
       setImagePreview(null);
-      window.location.reload(); // recargamos la pagina
+
+      // Establecer una bandera en el almacenamiento local
+      localStorage.setItem("showModalAfterReload", "true");
+
+      // Recargar la página
+      window.location.reload();
     } catch (error) {
       console.log("Error al agregar el producto");
     }
   };
+
+  // En otro componente o en el componente principal
+  useEffect(() => {
+    const showModalAfterReload = localStorage.getItem("showModalAfterReload");
+    if (showModalAfterReload === "true") {
+      setShowModal(true);
+      localStorage.removeItem("showModalAfterReload"); // Elimina la bandera después de mostrar el modal
+    }
+  }, []);
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -74,10 +127,6 @@ function ProductAdd() {
     } else {
       setImagePreview(null);
     }
-  };
-
-  const handleSubCategoriaChange = (e) => {
-    setSelectedSubCategoria(e.target.value);
   };
 
   useEffect(() => {
@@ -164,45 +213,91 @@ function ProductAdd() {
                           placeholder="Nombre"
                           value={nombre}
                           onChange={(e) => setNombre(e.target.value)}
+                          required
                         />
                       </div>
                       <div className="mb-3 w-100">
                         <label className="form-label">Categoria</label>
-                        <select
-                          className="form-select"
-                          arial-label="Default select example"
-                          onChange={handleCategoriaChange}
-                        >
-                          <option value={0} disabled hidden>
-                            Selecciona una categoría
-                          </option>
-                          {categorias.map((categoria) => (
-                            <option key={categoria.id} value={categoria.id}>
-                              {categoria.nombre}
-                            </option>
-                          ))}
-                        </select>
+                        <div className="dropdown" ref={dropdownCategoriaRef}>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Seleccione una categoria"
+                            onClick={() => setIsOpenCategoria(!isOpenCategoria)}
+                            value={selectedCategoria.nombre}
+                            readOnly
+                            onChange={() => {}}
+                            required
+                          />
+                          {isOpenCategoria && (
+                            <ul
+                              className="dropdown-menu scroll-list"
+                              style={{ display: "block" }}
+                            >
+                              {categorias.map((categoria) => (
+                                <li key={categoria.id}>
+                                  <button
+                                    className="dropdown-item d-flex align-items-center"
+                                    type="button"
+                                    onClick={() =>
+                                      handleCategoriaClick(categoria)
+                                    }
+                                  >
+                                    {categoria.nombre}
+                                  </button>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                        {selectedCategoria.id && (
+                          <p>
+                            Categoria seleccionada(ID): {selectedCategoria.id}
+                          </p>
+                        )}
                       </div>
                       <div className="mb-3 w-100">
                         <label className="form-label">subcategoria</label>
-                        <select
-                          className="form-select"
-                          arial-label="Default select example"
-                          onChange={handleSubCategoriaChange}
-                        >
-                          <option value={1} disabled hidden>
-                            Selecciona una subcategoría
-                          </option>
-
-                          {subCategorias.map((subCategoria) => (
-                            <option
-                              key={subCategoria.id}
-                              value={subCategoria.id}
+                        <div className="dropdown" ref={dropdownSubCategoriaRef}>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Seleccione unaSubcategoria"
+                            onClick={() =>
+                              setIsOpenSubCategoria(!isOpenSubCategoria)
+                            }
+                            value={selectedSubCategoria.nombre}
+                            readOnly
+                            onChange={() => {}}
+                            required
+                          />
+                          {isOpenSubCategoria && (
+                            <ul
+                              className="dropdown-menu scroll-list"
+                              style={{ display: "block" }}
                             >
-                              {subCategoria.nombre}
-                            </option>
-                          ))}
-                        </select>
+                              {subCategorias.map((subCategoria) => (
+                                <li key={subCategoria.id}>
+                                  <button
+                                    className="dropdown-item d-flex align-items-center"
+                                    type="button"
+                                    onClick={() =>
+                                      handleSubCategoriaClick(subCategoria)
+                                    }
+                                  >
+                                    {subCategoria.nombre}
+                                  </button>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                        {selectedSubCategoria.id && (
+                          <p>
+                            Subcategoria seleccionada(ID):{" "}
+                            {selectedSubCategoria.id}
+                          </p>
+                        )}
                       </div>
 
                       <div className="mb-3">
@@ -213,6 +308,7 @@ function ProductAdd() {
                           placeholder="Codigo"
                           value={cod}
                           onChange={(e) => setCod(e.target.value)}
+                          required
                         ></input>
                       </div>
                       <div className="mb-3 w-100">
@@ -266,6 +362,7 @@ function ProductAdd() {
                           placeholder="Precio"
                           value={precio}
                           onChange={(e) => setPrecio(e.target.value)}
+                          required
                         />
                       </div>
                     </div>
@@ -282,12 +379,13 @@ function ProductAdd() {
                   <h2 className="small-title">Dimensiones: 807 x 747</h2>
                   <div className="card">
                     <div className="card-body">
-                      <div class="mb-3">
+                      <div className="mb-3">
                         <input
                           className="form-control"
                           type="file"
                           accept="image/*"
                           onChange={handleFileChange}
+                          required
                         />
                         {imagePreview && (
                           <img
@@ -304,6 +402,41 @@ function ProductAdd() {
               </div>
             </div>
           </form>
+        </div>
+
+        {/* Modal de éxito */}
+        <div
+          className="modal"
+          tabIndex="-1"
+          role="dialog"
+          style={{ display: showModal ? "block" : "none" }}
+        >
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Éxito</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-dismiss="modal"
+                  onClick={() => setShowModal(false)}
+                ></button>
+              </div>
+              <div className="modal-body">
+                El producto se agregó correctamente.
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  data-dismiss="modal"
+                  onClick={() => setShowModal(false)}
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
       <Footer />
