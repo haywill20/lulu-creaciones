@@ -29,19 +29,19 @@ function ProductAdd() {
 
     try {
       const formData = new FormData();
-      formData.append('imagen', file);
-      formData.append('nombre', nombre);
-      formData.append('categoria', selectedCategoria);
-      formData.append('subCategoria', selectedSubCategoria);
-      formData.append('cod', cod);
-      formData.append('disponibilidad', disponibilidad);
-      formData.append('condicion', condicion);
-      formData.append('marca', marca);
-      formData.append('precio', precio);
+      formData.append("imagen", file);
+      formData.append("nombre", nombre);
+      formData.append("categoria", selectedCategoria);
+      formData.append("subCategoria", selectedSubCategoria);
+      formData.append("cod", cod);
+      formData.append("disponibilidad", disponibilidad);
+      formData.append("condicion", condicion);
+      formData.append("marca", marca);
+      formData.append("precio", precio);
 
       await axios.post(URIproductos, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
       });
       setNombre("");
@@ -111,8 +111,9 @@ function ProductAdd() {
 
       <main>
         <div className="container">
-          <form onSubmit={addProducto}
-            method="POST" 
+          <form
+            onSubmit={addProducto}
+            method="POST"
             encType="multipart/form-data"
           >
             {/* Title and Top Buttons Start */}
@@ -130,7 +131,8 @@ function ProductAdd() {
                 {/* Top Buttons Start */}
                 <div className="w-100 d-md-none" />
                 <div className="col-auto d-flex align-items-end justify-content-end">
-                  <button
+                  <a
+                    href="/productAdd"
                     type="submit"
                     className="btn btn-outline-primary btn-icon btn-icon-only"
                     data-delay='{"show":"500", "hide":"0"}'
@@ -139,7 +141,7 @@ function ProductAdd() {
                     title="Save"
                   >
                     <i data-acorn-icon="save" />
-                  </button>
+                  </a>
                 </div>
 
                 {/* Top Buttons End */}
@@ -225,17 +227,16 @@ function ProductAdd() {
                           <option value="No disponible">No disponible</option>
                         </select>
                       </div>
-                      <div className="mb-3 w-100" >
+                      <div className="mb-3 w-100">
                         <label className="form-label">Condición</label>
                         <select
                           className="form-select"
                           arial-label="Default select example"
                           //value={condicion}
                           onChange={(e) => {
-                            setCondicion(e.target.value)
-                            console.log(condicion)
-                            }
-                          }
+                            setCondicion(e.target.value);
+                            console.log(condicion);
+                          }}
                         >
                           <option value="Nuevo" selected>
                             Nuevo
@@ -288,12 +289,12 @@ function ProductAdd() {
                           onChange={handleFileChange}
                         />
                         {imagePreview && (
-                        <img
-                          src={imagePreview}
-                          alt="Preview"
-                          style={{ maxWidth: "100%", marginTop: "10px"}}
-                        />
-                      )}
+                          <img
+                            src={imagePreview}
+                            alt="Preview"
+                            style={{ maxWidth: "100%", marginTop: "10px" }}
+                          />
+                        )}
                       </div>
                     </div>
                   </div>
