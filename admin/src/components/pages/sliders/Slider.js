@@ -6,7 +6,10 @@ import { Link } from "react-router-dom";
 
 const URIslider = "http://localhost:8000/sliders/";
 const URIdeleteslider = "http://localhost:8000/deleteslider/";
-const sliderImagen = require.context("../../../../../backend/uploads", true);
+const sliderImagen = require.context(
+  "../../../../../backend/uploads/sliders",
+  true
+);
 function Slider() {
   const [sliders, setSliders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
