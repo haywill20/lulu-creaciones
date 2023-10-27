@@ -29,6 +29,13 @@ export const getProducto = async (req, res) => {
 //Metodo para agregar un producto
 export const createProducto = async (req, res) => {
   try {
+    const producto = req.body;
+    const imagen = req.file;
+
+    if (imagen) {
+      producto.imagen = imagen.filename;
+    }
+
     await ProductoModel.create(req.body);
     res.json({
       message: "¡Producto agregado correctamente!",
