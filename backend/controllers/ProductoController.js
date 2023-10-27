@@ -44,3 +44,17 @@ export const createProducto = async (req, res) => {
     res.json({ message: error.message });
   }
 };
+
+//Metodo para eliminar un producto
+export const deleteProducto = async (req, res) => {
+  try {
+    await ProductoModel.destroy({
+      where: { id: req.params.id },
+    });
+    res.json({
+      message: "¡Producto eliminado correctamente!",
+    });
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
