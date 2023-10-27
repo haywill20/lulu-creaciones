@@ -16,6 +16,13 @@ export const getAllSliders = async (req, res) => {
 //Metodo para agregar un slider
 export const createSlider = async (req, res) => {
   try {
+    const slider = req.body;
+    const imagen = req.file;
+
+    if (imagen) {
+      slider.imagen = imagen.filename;
+    }
+    
     await SliderModel.create(req.body);
     res.json({
       message: "¡Slider agregado correctamente!",

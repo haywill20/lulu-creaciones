@@ -20,7 +20,8 @@ import multer from "multer";
 const router = express.Router();
 
 // Configurar multer (inicializar)
-// Configuración de multer
+
+// Configuración de multer (Productos)
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "./uploads/productos");
@@ -32,9 +33,23 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+
+// Configuración de multer (Slider)
+const storageSlider = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./uploads/sliders");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+const uploadSlider = multer({ storage: storageSlider });
+
+
 //ruta para los sliders
 router.get("/sliders", getAllSliders);
-router.post("/createslider", createSlider);
+router.post("/createslider",uploadSlider.single("imagen"), createSlider);
 router.delete("/deleteslider/:id", deleteSlider);
 
 //ruta para las categorias

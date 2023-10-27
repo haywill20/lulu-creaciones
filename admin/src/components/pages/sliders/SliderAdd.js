@@ -23,6 +23,8 @@ function SliderAdd() {
   const [subtituloExcedido, setSubtituloExcedido] = useState(false);
   const [textoBotonExcedido, setTextoBotonExcedido] = useState(false);
   const [parrafoExcedido, setParrafoExcedido] = useState(false);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [file, setFile] = useState(null);
 
   const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del modal de éxito
 
@@ -34,6 +36,22 @@ function SliderAdd() {
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setIsOpen(false);
+    }
+  };
+
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    setFile(selectedFile);
+
+    // Mostrar una vista previa de la imagen
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target.result);
+      };
+      reader.readAsDataURL(selectedFile);
+    } else {
+      setImagePreview(null);
     }
   };
 
@@ -72,19 +90,25 @@ function SliderAdd() {
     }
 
     try {
-      await axios.post(URIslider, {
-        titulo: titulo,
-        subtitulo: subtitulo,
-        parrafo: parrafo,
-        texto_boton: textoBoton,
-        id_producto: selectedItem.id,
+      const formData = new FormData();
+      formData.append("imagen", file);
+      formData.append("titulo", titulo);
+      formData.append("subtitulo", subtitulo);
+      formData.append("parrafo", parrafo);
+      formData.append("texto_boton", textoBoton);
+      formData.append("id_producto", selectedItem.id);
+      await axios.post(URIslider, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
       setTitulo("");
       setSubtitulo("");
       setTextoBoton("");
       setSelectedItem({ id: null, name: "" });
       setParrafo("");
-
+      setImagePreview(null);
+      setFile(null);
       // Mostrar el modal de éxito
       setShowModal(true);
     } catch (error) {
@@ -117,7 +141,11 @@ function SliderAdd() {
       <Menu />
       <main>
         <div className="container">
-          <form onSubmit={addSlider}>
+          <form 
+            onSubmit={addSlider} 
+            method="POST"
+            encType="multipart/form-data"  
+            >
             <div className="page-title-container">
               <div className="row g-0">
                 <div className="col-auto mb-3 mb-md-0 me-auto">
@@ -264,14 +292,27 @@ function SliderAdd() {
               <div className="col-xl-4 mb-n5">
                 <div className="mb-5">
                   <h2 className="small-title">Image</h2>
+                  <div className="mb-3">
                   <div className="card">
                     <div className="card-body">
-                      <div
-                        className="dropzone dropzone-columns row g-2 row-cols-1 row-cols-md-1 border-0 p-0"
-                        id="dropzoneProductImage"
-                      />
+                      <div class="mb-3">
+                        <input
+                          className="form-control"
+                          type="file"
+                          accept="image/*"
+                          onChange={handleFileChange}
+                        />
+                        {imagePreview && (
+                          <img
+                            src={imagePreview}
+                            alt="Preview"
+                            style={{ maxWidth: "100%", marginTop: "10px" }}
+                          />
+                        )}
+                      </div>
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             </div>
