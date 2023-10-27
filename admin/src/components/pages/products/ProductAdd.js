@@ -54,6 +54,7 @@ function ProductAdd() {
       setPrecio("");
       setFile(null);
       setImagePreview(null);
+      window.location.reload(); // recargamos la pagina
     } catch (error) {
       console.log("Error al agregar el producto");
     }
@@ -131,8 +132,8 @@ function ProductAdd() {
                 {/* Top Buttons Start */}
                 <div className="w-100 d-md-none" />
                 <div className="col-auto d-flex align-items-end justify-content-end">
-                  <a
-                    href="/productAdd"
+                  {" "}
+                  <button
                     type="submit"
                     className="btn btn-outline-primary btn-icon btn-icon-only"
                     data-delay='{"show":"500", "hide":"0"}'
@@ -141,7 +142,7 @@ function ProductAdd() {
                     title="Save"
                   >
                     <i data-acorn-icon="save" />
-                  </a>
+                  </button>
                 </div>
 
                 {/* Top Buttons End */}

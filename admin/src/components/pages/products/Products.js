@@ -4,6 +4,7 @@ import Menu from "../../common/Menu";
 import axios from "axios";
 
 const URI = "http://localhost:8000/productos/";
+const URIdeleteproductos = "http://localhost:8000/deleteproducto/";
 const productImagen = require.context(
   "../../../../../backend/uploads/productos",
   true
@@ -13,6 +14,8 @@ function Products() {
   const [productos, setProductos] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+
+  const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del modal de éxito
 
   useEffect(() => {
     getProductos();
@@ -25,6 +28,17 @@ function Products() {
       setProductos(res.data);
     } catch (error) {
       console.error("Error al obtener los Productos:", error);
+    }
+  };
+
+  //procedimiento para eliminar un producto
+  const deleteProducto = async (id) => {
+    try {
+      await axios.delete(`${URIdeleteproductos}${id}`);
+      getProductos();
+      setShowModal(true);
+    } catch (error) {
+      console.error("Error al eliminar el producto", error);
     }
   };
 
@@ -308,7 +322,10 @@ function Products() {
                               <button className="btn">
                                 <i className="icon fa-regular fa-pen-to-square"></i>
                               </button>
-                              <button className="btn">
+                              <button
+                                className="btn"
+                                onClick={() => deleteProducto(producto.id)}
+                              >
                                 <i className="icon fa-regular fa-trash-can"></i>{" "}
                               </button>
                             </div>
@@ -378,6 +395,37 @@ function Products() {
               </nav>
             </div>
             {/* Items Pagination End */}
+          </div>
+        </div>
+        <div
+          className="modal"
+          tabIndex="-1"
+          role="dialog"
+          style={{ display: showModal ? "block" : "none" }}
+        >
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Exito</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-dismiss="modal"
+                  onClick={() => setShowModal(false)}
+                ></button>
+              </div>
+              <div className="modal-body">Producto Eliminado</div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  data-dismiss="modal"
+                  onClick={() => setShowModal(false)}
+                >
+                  Listo
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </main>
