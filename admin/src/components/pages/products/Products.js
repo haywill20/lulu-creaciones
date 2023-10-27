@@ -61,13 +61,14 @@ function Products() {
               {/* Top Buttons Start */}
               <div className="w-100 d-md-none" />
               <div className="col-12 col-sm-6 col-md-auto d-flex align-items-end justify-content-end mb-2 mb-sm-0 order-sm-3">
-                <button
+                <a
+                  href="/productAdd"
                   type="button"
                   className="btn btn-outline-primary btn-icon btn-icon-start ms-0 ms-sm-1 w-100 w-md-auto"
                 >
                   <i data-acorn-icon="plus" />
                   <span>Añadir Producto</span>
-                </button>
+                </a>
                 <div className="dropdown d-inline-block d-lg-none">
                   <button
                     type="button"

@@ -5,11 +5,14 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const URIslider = "http://localhost:8000/sliders/";
+const URIdeleteslider = "http://localhost:8000/deleteslider/";
 const sliderImagen = require.context("../../../../../backend/uploads", true);
 function Slider() {
   const [sliders, setSliders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+
+  const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del modal de éxito
 
   useEffect(() => {
     getAllSliders();
@@ -23,6 +26,13 @@ function Slider() {
     } catch (error) {
       console.error("Error al obtener los Sliders:", error);
     }
+  };
+
+  //procedimiento para eliminar un slider
+  const deleteSlider = async (id) => {
+    await axios.delete(`${URIdeleteslider}${id}`);
+    getAllSliders();
+    setShowModal(true);
   };
 
   // Calcula los sliders a mostrar en la página actual
@@ -48,7 +58,7 @@ function Slider() {
               <div className="col-auto mb-3 mb-md-0 me-auto">
                 <div className="w-auto sw-md-30">
                   <h1 className="mb-0 pb-0 display-4" id="title">
-                    Lista de Banners
+                    Lista de Sliders
                   </h1>
                 </div>
               </div>
@@ -56,14 +66,14 @@ function Slider() {
               {/* Top Buttons Start */}
               <div className="w-100 d-md-none" />
               <div className="col-12 col-sm-6 col-md-auto d-flex align-items-end justify-content-end mb-2 mb-sm-0 order-sm-3">
-                <Link
-                  to={"/sliderAdd"}
+                <a
+                  href="/sliderAdd"
                   type="button"
                   className="btn btn-outline-primary btn-icon btn-icon-start ms-0 ms-sm-1 w-100 w-md-auto"
                 >
                   <i data-acorn-icon="plus" />
                   <span>Añadir Slider</span>
-                </Link>
+                </a>
                 <div className="dropdown d-inline-block d-lg-none">
                   <button
                     type="button"
@@ -311,7 +321,10 @@ function Slider() {
                               <button className="btn">
                                 <i className="icon fa-regular fa-pen-to-square"></i>
                               </button>
-                              <button className="btn">
+                              <button
+                                className="btn"
+                                onClick={() => deleteSlider(slider.id)}
+                              >
                                 <i className="icon fa-regular fa-trash-can"></i>{" "}
                               </button>
                             </div>
@@ -380,6 +393,39 @@ function Slider() {
               </nav>
             </div>
             {/* Items Pagination End */}
+          </div>
+        </div>
+
+        {/* Modal de éxito */}
+        <div
+          className="modal"
+          tabIndex="-1"
+          role="dialog"
+          style={{ display: showModal ? "block" : "none" }}
+        >
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Exito</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-dismiss="modal"
+                  onClick={() => setShowModal(false)}
+                ></button>
+              </div>
+              <div className="modal-body">Slider Eliminado</div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  data-dismiss="modal"
+                  onClick={() => setShowModal(false)}
+                >
+                  Listo
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </main>
