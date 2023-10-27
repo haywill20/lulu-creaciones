@@ -17,34 +17,32 @@ function ProductAdd() {
   const [subCategorias, setSubCategorias] = useState([]);
   const [selectedSubCategoria, setSelectedSubCategoria] = useState(0);
   const [cod, setCod] = useState("");
-  const [disponibilidad, setDisponibilidad] = useState("");
-  const [condicion, setCondicion] = useState("");
-  const [marca, setMarca] = useState("");
+  const [disponibilidad, setDisponibilidad] = useState("En stock");
+  const [condicion, setCondicion] = useState("Nuevo");
+  const [marca, setMarca] = useState("Lúlu");
   const [precio, setPrecio] = useState("");
+  const [file, setFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   const addProducto = async (e) => {
     e.preventDefault();
 
-    // Imprime los valores en la consola antes de enviar la solicitud POST
-    console.log("Nombre:", nombre);
-    console.log("Categoría seleccionada:", selectedCategoria);
-    console.log("Subcategoría seleccionada:", selectedSubCategoria);
-    console.log("Código:", cod);
-    console.log("Disponibilidad:", disponibilidad);
-    console.log("Condición:", condicion);
-    console.log("Marca:", marca);
-    console.log("Precio:", precio);
-
     try {
-      await axios.post(URIproductos, {
-        nombre: nombre,
-        categoria: selectedCategoria,
-        subCategoria: selectedSubCategoria,
-        cod: cod,
-        disponibilidad: disponibilidad,
-        condicion: condicion,
-        marca: marca,
-        precio: precio,
+      const formData = new FormData();
+      formData.append('imagen', file);
+      formData.append('nombre', nombre);
+      formData.append('categoria', selectedCategoria);
+      formData.append('subCategoria', selectedSubCategoria);
+      formData.append('cod', cod);
+      formData.append('disponibilidad', disponibilidad);
+      formData.append('condicion', condicion);
+      formData.append('marca', marca);
+      formData.append('precio', precio);
+
+      await axios.post(URIproductos, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
       setNombre("");
       setSelectedCategoria("");
@@ -54,8 +52,26 @@ function ProductAdd() {
       setCondicion("");
       setMarca("");
       setPrecio("");
+      setFile(null);
+      setImagePreview(null);
     } catch (error) {
       console.log("Error al agregar el producto");
+    }
+  };
+
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    setFile(selectedFile);
+
+    // Mostrar una vista previa de la imagen
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target.result);
+      };
+      reader.readAsDataURL(selectedFile);
+    } else {
+      setImagePreview(null);
     }
   };
 
@@ -95,7 +111,10 @@ function ProductAdd() {
 
       <main>
         <div className="container">
-          <form onSubmit={addProducto}>
+          <form onSubmit={addProducto}
+            method="POST" 
+            encType="multipart/form-data"
+          >
             {/* Title and Top Buttons Start */}
             <div className="page-title-container">
               <div className="row g-0">
@@ -237,17 +256,7 @@ function ProductAdd() {
                           <option value="otra">Otra</option>
                         </select>
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-4 mb-n5">
-                {/* Price Start */}
-                <div className="mb-5">
-                  <h2 className="small-title">Precio</h2>
-                  <div className="card">
-                    <div className="card-body">
-                      <div className="mb-3">
+                      <div className="mb-3 w-100">
                         <label className="form-label">Precio</label>
                         <input
                           type="number"
@@ -260,20 +269,32 @@ function ProductAdd() {
                     </div>
                   </div>
                 </div>
-                {/* Price End */}
+              </div>
+              <div className="col-xl-4 mb-n5">
                 {/* History Start */}
 
                 {/* History End */}
                 {/* Image Start */}
-                <div className="mb-5">
+                <div className="mb-3">
                   <h2 className="small-title">Image</h2>
-                  <h2 className="small-title">Dimenciones: 807 x 747</h2>
+                  <h2 className="small-title">Dimensiones: 807 x 747</h2>
                   <div className="card">
                     <div className="card-body">
-                      <div
-                        className="dropzone dropzone-columns row g-2 row-cols-1 row-cols-md-1 border-0 p-0"
-                        id="dropzoneProductImage"
-                      />
+                      <div class="mb-3">
+                        <input
+                          className="form-control"
+                          type="file"
+                          accept="image/*"
+                          onChange={handleFileChange}
+                        />
+                        {imagePreview && (
+                        <img
+                          src={imagePreview}
+                          alt="Preview"
+                          style={{ maxWidth: "100%", marginTop: "10px"}}
+                        />
+                      )}
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -14,8 +14,22 @@ import {
 } from "../controllers/SliderControllers.js";
 import { getAllSubCategorias } from "../controllers/SubCategoriaController.js";
 import { createSuscripcion } from "../controllers/SuscripcionesController.js";
+import multer from 'multer';
 
 const router = express.Router();
+
+// Configurar multer (inicializar)
+// Configuración de multer
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './uploads/productos');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
 
 //ruta para los sliders
 router.get("/sliders", getAllSliders);
@@ -30,7 +44,7 @@ router.get("/subcategorias", getAllSubCategorias);
 
 //ruta para los productos
 router.get("/productos", getAllProductos);
-router.post("/createproducto", createProducto);
+router.post("/createproducto", upload.single('imagen'), createProducto);
 
 //ruta para mostrar un unico producto
 router.get("/productos/:id", getProducto);
