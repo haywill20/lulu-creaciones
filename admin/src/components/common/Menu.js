@@ -28,7 +28,7 @@ function Menu() {
               <img
                 className="profile"
                 alt="profile"
-                src="img/profile/profile-1.webp"
+                src="img/profile/perfil.png"
               />
               <div className="name">Deborah</div>
             </a>
@@ -40,23 +40,23 @@ function Menu() {
                 <div className="col-6 ps-1 pe-1">
                   <ul className="list-unstyled">
                     <li>
-                      <a href="#">User Info</a>
+                      <a href="#">Información</a>
                     </li>
                     <li>
-                      <a href="#">Preferences</a>
+                      <a href="#">Preferencias</a>
                     </li>
                     <li>
-                      <a href="#">Calendar</a>
+                      <a href="#">Calendario</a>
                     </li>
                   </ul>
                 </div>
                 <div className="col-6 pe-1 ps-1">
                   <ul className="list-unstyled">
                     <li>
-                      <a href="#">Security</a>
+                      <a href="#">Seguridad</a>
                     </li>
                     <li>
-                      <a href="#">Billing</a>
+                      <a href="#">Facturación</a>
                     </li>
                   </ul>
                 </div>
@@ -70,20 +70,17 @@ function Menu() {
                 <div className="col-6 ps-1 pe-1">
                   <ul className="list-unstyled">
                     <li>
-                      <a href="#">Themes</a>
-                    </li>
-                    <li>
-                      <a href="#">Language</a>
+                      <a href="#">Idioma</a>
                     </li>
                   </ul>
                 </div>
                 <div className="col-6 pe-1 ps-1">
                   <ul className="list-unstyled">
                     <li>
-                      <a href="#">Devices</a>
+                      <a href="#">Estadisticas</a>
                     </li>
                     <li>
-                      <a href="#">Storage</a>
+                      <a href="#">Inventario</a>
                     </li>
                   </ul>
                 </div>
@@ -101,7 +98,7 @@ function Menu() {
                           className="me-2"
                           data-acorn-size={17}
                         />
-                        <span className="align-middle">Help</span>
+                        <span className="align-middle">Ayuda</span>
                       </a>
                     </li>
                     <li>
@@ -125,7 +122,7 @@ function Menu() {
                           className="me-2"
                           data-acorn-size={17}
                         />
-                        <span className="align-middle">Settings</span>
+                        <span className="align-middle">Config</span>
                       </a>
                     </li>
                     <li>
@@ -135,7 +132,7 @@ function Menu() {
                           className="me-2"
                           data-acorn-size={17}
                         />
-                        <span className="align-middle">Logout</span>
+                        <span className="align-middle">Cerrar</span>
                       </a>
                     </li>
                   </ul>
@@ -229,23 +226,23 @@ function Menu() {
                 </ul>
               </li>
               <li>
-                <a href="#storefront" data-href="Storefront.html">
+                <Link to={"/contactos"} data-href="Storefront.html">
                   <i
-                    data-acorn-icon="screen"
-                    className="icon"
+                    className="icon fa-regular fa-address-book"
                     data-acorn-size={18}
-                  />
+                  ></i>
+
                   <span className="label">Contactos</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="Discount.html">
+                <Link to={"/ayudas"}>
                   <i
                     className="icon fa-solid fa-circle-question"
                     data-acorn-size={18}
                   ></i>
                   <span className="label">Ayudas</span>
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#orders" data-href="Orders.html">

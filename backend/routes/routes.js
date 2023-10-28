@@ -10,6 +10,7 @@ import {
   deleteProducto,
   getAllProductos,
   getProducto,
+  updateProducto,
 } from "../controllers/ProductoController.js";
 import {
   createSlider,
@@ -64,11 +65,10 @@ router.get("/subcategorias", getAllSubCategorias);
 
 //ruta para los productos
 router.get("/productos", getAllProductos);
+router.get("/productos/:id", getProducto);
+router.put("/updateproducto/:id", updateProducto);
 router.post("/createproducto", upload.single("imagen"), createProducto);
 router.delete("/deleteproducto/:id", deleteProducto);
-
-//ruta para mostrar un unico producto
-router.get("/productos/:id", getProducto);
 
 //ruta para contactos
 router.get("/contactos", getAllContactos);

@@ -5,6 +5,8 @@ import Products from "./components/pages/products/Products";
 import ProductAdd from "./components/pages/products/ProductAdd";
 import Slider from "./components/pages/sliders/Slider";
 import SliderAdd from "./components/pages/sliders/SliderAdd";
+import Contactos from "./components/pages/contactos/Contactos";
+import Ayudas from "./components/pages/Ayudas/Ayudas";
 function App() {
   return (
     <>
@@ -16,6 +18,8 @@ function App() {
             <Route path="/productAdd" element={<ProductAdd />} />
             <Route path="/sliders" element={<Slider />} />
             <Route path="/sliderAdd" element={<SliderAdd />} />
+            <Route path="/contactos" element={<Contactos />} />
+            <Route path="/ayudas" element={<Ayudas />} />
           </Routes>
         </BrowserRouter>
       </div>

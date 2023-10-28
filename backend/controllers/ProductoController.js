@@ -45,6 +45,20 @@ export const createProducto = async (req, res) => {
   }
 };
 
+//Metodo para actualizar un producto
+export const updateProducto = async (req, res) => {
+  try {
+    await ProductoModel.update(req.body, {
+      where: { id: req.params.id },
+    });
+    res.json({
+      message: "¡Producto actualizado correctamente!",
+    });
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
+
 //Metodo para eliminar un producto
 export const deleteProducto = async (req, res) => {
   try {

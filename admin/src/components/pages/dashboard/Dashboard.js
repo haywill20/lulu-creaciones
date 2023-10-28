@@ -227,7 +227,7 @@ function Dashboard() {
                           <i class="fa-regular fa-circle-question text-primary"></i>
                         </div>
                         <div className="mb-1 d-flex align-items-center text-alternate text-small lh-1-25">
-                          Ayudas
+                          AYUDAS
                         </div>
                         <div className="text-primary cta-4">{ayudasCount}</div>
                       </div>
