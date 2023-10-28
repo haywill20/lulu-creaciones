@@ -47,7 +47,7 @@ function Contactos() {
             <div className="col">
               <a href="#" className="card hover-border-primary h-100">
                 {contactos.map((contacto) => (
-                  <div className="card-body row g-0">
+                  <div className="card-body row g-0" key={contacto.id}>
                     <div className="col-auto">
                       <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
                         <i class="fa-regular fa-user text-primary"></i>

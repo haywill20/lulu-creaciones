@@ -224,7 +224,7 @@ function Dashboard() {
                     <div className="card h-100 hover-scale-up cursor-pointer">
                       <div className="card-body d-flex flex-column align-items-center">
                         <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
-                          <i class="fa-regular fa-circle-question text-primary"></i>
+                          <i className="fa-regular fa-circle-question text-primary"></i>
                         </div>
                         <div className="mb-1 d-flex align-items-center text-alternate text-small lh-1-25">
                           AYUDAS
@@ -293,7 +293,10 @@ function Dashboard() {
                       </div>
                     </div>
                     {productos.map((producto) => (
-                      <div className="d-flex flex-row align-items-center justify-content-between mb-2">
+                      <div
+                        className="d-flex flex-row align-items-center justify-content-between mb-2"
+                        key={producto.id}
+                      >
                         <div className="d-flex flex-column">
                           <div>
                             {producto.id} {producto.nombre}
