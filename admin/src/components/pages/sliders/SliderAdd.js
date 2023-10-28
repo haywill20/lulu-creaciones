@@ -307,7 +307,7 @@ function SliderAdd() {
                   <div className="mb-3">
                     <div className="card">
                       <div className="card-body">
-                        <div class="mb-3">
+                        <div className="mb-3">
                           <input
                             className="form-control"
                             type="file"

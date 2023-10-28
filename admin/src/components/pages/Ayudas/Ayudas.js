@@ -53,7 +53,7 @@ function Ayudas() {
                     <div className="sw-5 sh-5 mb-3 d-inline-block bg-primary d-flex justify-content-center align-items-center rounded-xl mx-auto">
                       <div className="text-white">
                         {" "}
-                        <i class="fa-regular fa-user"></i>
+                        <i className="fa-regular fa-user"></i>
                       </div>
                     </div>
                   </div>
@@ -72,7 +72,7 @@ function Ayudas() {
                             className="btn btn-sm btn-icon btn-icon btn-icon-only btn-outline-primary"
                             type="button"
                           >
-                            <i class="fa-solid fa-paper-plane"></i>
+                            <i className="fa-solid fa-paper-plane"></i>
                           </button>
                         </div>
                       </div>

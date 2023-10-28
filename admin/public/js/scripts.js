@@ -75,10 +75,10 @@ class Scripts {
     if (typeof OrdersList !== "undefined") {
       const ordersList = new OrdersList();
     }
-    // products.detail.js initialization
+    /*     // products.detail.js initialization
     if (typeof ProductsDetail !== "undefined") {
       const productsDetail = new ProductsDetail();
-    }
+    } */
     // products.list.js initialization
     if (typeof ProductsList !== "undefined") {
       const productsList = new ProductsList();

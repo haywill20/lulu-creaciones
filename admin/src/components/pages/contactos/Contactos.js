@@ -50,7 +50,7 @@ function Contactos() {
                   <div className="card-body row g-0" key={contacto.id}>
                     <div className="col-auto">
                       <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
-                        <i class="fa-regular fa-user text-primary"></i>
+                        <i className="fa-regular fa-user text-primary"></i>
                       </div>
                     </div>
                     <div className="col">
