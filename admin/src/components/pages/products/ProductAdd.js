@@ -53,6 +53,7 @@ function ProductAdd() {
   const [condicion, setCondicion] = useState("Nuevo");
   const [marca, setMarca] = useState("Lúlu");
   const [precio, setPrecio] = useState("");
+  const [cantidad, setCantidad] = useState("");
   const [file, setFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -76,6 +77,7 @@ function ProductAdd() {
       formData.append("disponibilidad", disponibilidad);
       formData.append("condicion", condicion);
       formData.append("marca", marca);
+      formData.append("cantidad", cantidad);
       formData.append("precio", precio);
 
       await axios.post(URIproductos, formData, {
@@ -90,6 +92,7 @@ function ProductAdd() {
       setDisponibilidad("");
       setCondicion("");
       setMarca("");
+      setCantidad("");
       setPrecio("");
       setFile(null);
       setImagePreview(null);
@@ -323,6 +326,17 @@ function ProductAdd() {
                           </option>
                           <option value="No disponible">No disponible</option>
                         </select>
+                      </div>
+                      <div className="mb-3 w-100">
+                        <label className="form-label">cantidad</label>
+                        <input
+                          type="number"
+                          className="form-control"
+                          placeholder="Cantidad"
+                          value={cantidad}
+                          onChange={(e) => setCantidad(e.target.value)}
+                          required
+                        />
                       </div>
                       <div className="mb-3 w-100">
                         <label className="form-label">Condición</label>

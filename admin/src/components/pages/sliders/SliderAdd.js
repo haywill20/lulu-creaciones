@@ -109,12 +109,24 @@ function SliderAdd() {
       setParrafo("");
       setImagePreview(null);
       setFile(null);
-      // Mostrar el modal de éxito
-      setShowModal(true);
+      // Establecer una bandera en el almacenamiento local
+      localStorage.setItem("showModalAfterReload", "true");
+
+      // Recargar la página
+      window.location.reload();
     } catch (error) {
       console.log("Error al agregar el producto");
     }
   };
+
+  // En otro componente o en el componente principal
+  useEffect(() => {
+    const showModalAfterReload = localStorage.getItem("showModalAfterReload");
+    if (showModalAfterReload === "true") {
+      setShowModal(true);
+      localStorage.removeItem("showModalAfterReload"); // Elimina la bandera después de mostrar el modal
+    }
+  }, []);
 
   const handleTituloChange = (e) => {
     setTitulo(e.target.value);
@@ -141,11 +153,11 @@ function SliderAdd() {
       <Menu />
       <main>
         <div className="container">
-          <form 
-            onSubmit={addSlider} 
+          <form
+            onSubmit={addSlider}
             method="POST"
-            encType="multipart/form-data"  
-            >
+            encType="multipart/form-data"
+          >
             <div className="page-title-container">
               <div className="row g-0">
                 <div className="col-auto mb-3 mb-md-0 me-auto">
@@ -293,26 +305,27 @@ function SliderAdd() {
                 <div className="mb-5">
                   <h2 className="small-title">Image</h2>
                   <div className="mb-3">
-                  <div className="card">
-                    <div className="card-body">
-                      <div class="mb-3">
-                        <input
-                          className="form-control"
-                          type="file"
-                          accept="image/*"
-                          onChange={handleFileChange}
-                        />
-                        {imagePreview && (
-                          <img
-                            src={imagePreview}
-                            alt="Preview"
-                            style={{ maxWidth: "100%", marginTop: "10px" }}
+                    <div className="card">
+                      <div className="card-body">
+                        <div class="mb-3">
+                          <input
+                            className="form-control"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleFileChange}
+                            required
                           />
-                        )}
+                          {imagePreview && (
+                            <img
+                              src={imagePreview}
+                              alt="Preview"
+                              style={{ maxWidth: "100%", marginTop: "10px" }}
+                            />
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
                 </div>
               </div>
             </div>

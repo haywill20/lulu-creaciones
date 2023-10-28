@@ -195,7 +195,7 @@ function Menu() {
                     className="icon fa-solid fa-boxes-stacked"
                     data-acorn-size={18}
                   ></i>
-                  <span className="label">Products</span>
+                  <span className="label">Productos</span>
                 </a>
                 <ul id="products">
                   <li>
@@ -209,6 +209,43 @@ function Menu() {
                     </Link>
                   </li>
                 </ul>
+              </li>
+              <li>
+                <a href="#sliders" data-href="Products.html">
+                  <i className="icon fa-solid fa-tags" data-acorn-size={18}></i>
+                  <span className="label">Sliders</span>
+                </a>
+                <ul id="sliders">
+                  <li>
+                    <Link to={"/sliders"}>
+                      <span className="label">Lista</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to={"/sliderAdd"}>
+                      <span className="label">Agregar</span>
+                    </Link>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#storefront" data-href="Storefront.html">
+                  <i
+                    data-acorn-icon="screen"
+                    className="icon"
+                    data-acorn-size={18}
+                  />
+                  <span className="label">Contactos</span>
+                </a>
+              </li>
+              <li>
+                <a href="Discount.html">
+                  <i
+                    className="icon fa-solid fa-circle-question"
+                    data-acorn-size={18}
+                  ></i>
+                  <span className="label">Ayudas</span>
+                </a>
               </li>
               <li>
                 <a href="#orders" data-href="Orders.html">
@@ -230,27 +267,7 @@ function Menu() {
                   <span className="label">Clientes</span>
                 </a>
               </li>
-              <li>
-                <a href="#sliders" data-href="Products.html">
-                  <i
-                    className="icon fa-solid fa-boxes-stacked"
-                    data-acorn-size={18}
-                  ></i>
-                  <span className="label">Sliders</span>
-                </a>
-                <ul id="sliders">
-                  <li>
-                    <Link to={"/sliders"}>
-                      <span className="label">Lista</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={"/sliderAdd"}>
-                      <span className="label">Agregar</span>
-                    </Link>
-                  </li>
-                </ul>
-              </li>
+
               <li>
                 <a href="#customers" data-href="Customers.html">
                   <i
@@ -260,26 +277,7 @@ function Menu() {
                   <span className="label">Categorias</span>
                 </a>
               </li>
-              <li>
-                <a href="#storefront" data-href="Storefront.html">
-                  <i
-                    data-acorn-icon="screen"
-                    className="icon"
-                    data-acorn-size={18}
-                  />
-                  <span className="label">Contactos</span>
-                </a>
-              </li>
 
-              <li>
-                <a href="Discount.html">
-                  <i
-                    className="icon fa-solid fa-circle-question"
-                    data-acorn-size={18}
-                  ></i>
-                  <span className="label">Ayudas</span>
-                </a>
-              </li>
               <li>
                 <a href="Settings.html">
                   <i
