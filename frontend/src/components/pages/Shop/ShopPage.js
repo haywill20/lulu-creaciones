@@ -50,7 +50,7 @@ const ShopPage = () => {
         );
       }
 
-      setProductos(filteredProductos.slice(0, initialProductCount));
+      setProductos(filteredProductos.slice(filteredProductos.length - initialProductCount , filteredProductos.length));
     } catch (error) {
       console.error("Error al obtener los Productos:", error);
     }

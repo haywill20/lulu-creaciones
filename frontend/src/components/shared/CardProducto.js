@@ -11,9 +11,11 @@ const CardProducto = ({ limiteProductos }) => {
     window.open(whatsappLink, "_blank");
   };
 
+  const productosRevertidos = [...limiteProductos].reverse();
+
   return (
     <>
-      {limiteProductos.map((producto) => (
+      {productosRevertidos.map((producto) => (
         <div className="col-sm-3" key={producto.id}>
           <div className="product-image-wrapper">
             <div className="single-products">

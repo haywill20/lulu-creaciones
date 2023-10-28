@@ -52,44 +52,11 @@ const HomePage = () => {
         );
       }
 
-      setProductos(filteredProductos.slice(0, initialProductCount));
+      setProductos(filteredProductos.slice(filteredProductos.length - initialProductCount , filteredProductos.length));
     } catch (error) {
       console.error("Error al obtener los Productos:", error);
     }
   };
-
-  // const getProductos = async (subcategoriaId, nombre_categoria, nombre_subcategoria) => {
-  //   try {
-  //     const response = await axios.get(URI);
-  //     let filteredProductos = response.data;
-
-  //     //=================
-  //     const responseCategoria = await axios.get(URIcategorias);
-  //     let cat = responseCategoria.data;
-
-  //     //=================
-  //     const responseSubCategoria = await axios.get(URIsubcategorias);
-  //     let subcat = responseSubCategoria.data;
-      
-  //     console.log("subcategoriaId", subcategoriaId);
-  //     console.log("nombre_categoria", nombre_categoria);
-  //     console.log("nombre_subcategoria", nombre_subcategoria);
-  //     if (subcategoriaId !== null) {
-  //       // Obtén el ID de la categoría "collares" y la subcategoría "perlas" de tus datos
-  //       const categoriaCollaresId = cat.find((categoria) => categoria.nombre === nombre_categoria).id;
-  //       const subcategoriaPerlasId = subcat.find((subcategoria) => subcategoria.nombre === nombre_subcategoria).id;
-  
-  //       filteredProductos = filteredProductos.filter((producto) => {
-  //         return producto.id_categoria === categoriaCollaresId && producto.id_subcategoria === subcategoriaPerlasId;
-  //       });
-  //     }
-  
-  //     setProductos(filteredProductos.slice(0, initialProductCount));
-  //   } catch (error) {
-  //     console.error("Error al obtener los Productos:", error);
-  //   }
-  // };
-  
 
   return (
     <>
