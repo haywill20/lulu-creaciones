@@ -73,7 +73,7 @@ const CardProducto = ({ limiteProductos }) => {
                 </li>
                 <li>
                   <a href="#" onClick={() => handleComprarClick(producto)}>
-                    <i className="fa fa-money"></i>Comprar
+                    <i className="fa-brands fa-whatsapp"></i>Comprar
                   </a>
                 </li>
               </ul>

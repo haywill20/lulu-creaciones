@@ -4,7 +4,7 @@ import Header from "../../common/Header";
 import TopBar from "../../common/TopBar";
 import axios from "axios";
 
-const URI = "http://localhost:8000/contactos/";
+const URI = "http://localhost:8000/contactocreate/";
 
 const ContactPage = () => {
   const [nombre, setNombre] = useState("");

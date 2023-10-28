@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-const URI = "http://localhost:8000/suscripciones/";
+const URI = "http://localhost:8000/createsuscripciones/";
 
 const Footer = () => {
   const [correo, setCorreo] = useState("");
@@ -129,6 +129,7 @@ const Footer = () => {
                       placeholder="Su dirección de correo"
                       value={correo}
                       onChange={(e) => setCorreo(e.target.value)}
+                      required
                     />
                     <button type="submit" className="btn btn-default">
                       <i className="fa-regular fa-circle-right"></i>{" "}

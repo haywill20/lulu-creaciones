@@ -14,6 +14,7 @@ const ProductoModel = db.define("productos", {
   disponibilidad: { type: DataTypes.STRING },
   condicion: { type: DataTypes.STRING },
   marca: { type: DataTypes.STRING },
+  cantidad: { type: DataTypes.INTEGER },
   imagen: { type: DataTypes.STRING },
 });
 export default ProductoModel;

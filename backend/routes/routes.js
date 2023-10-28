@@ -1,7 +1,10 @@
 import express from "express";
-import { createAyuda } from "../controllers/AyudaController.js";
+import { createAyuda, getAllAyudas } from "../controllers/AyudaController.js";
 import { getAllCategorias } from "../controllers/CategoriaController.js";
-import { createContacto } from "../controllers/ContactoController.js";
+import {
+  createContacto,
+  getAllContactos,
+} from "../controllers/ContactoController.js";
 import {
   createProducto,
   deleteProducto,
@@ -14,7 +17,10 @@ import {
   getAllSliders,
 } from "../controllers/SliderControllers.js";
 import { getAllSubCategorias } from "../controllers/SubCategoriaController.js";
-import { createSuscripcion } from "../controllers/SuscripcionesController.js";
+import {
+  createSuscripcion,
+  getAllSuscripciones,
+} from "../controllers/SuscripcionesController.js";
 import multer from "multer";
 
 const router = express.Router();
@@ -33,7 +39,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-
 // Configuración de multer (Slider)
 const storageSlider = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -46,10 +51,9 @@ const storageSlider = multer.diskStorage({
 
 const uploadSlider = multer({ storage: storageSlider });
 
-
 //ruta para los sliders
 router.get("/sliders", getAllSliders);
-router.post("/createslider",uploadSlider.single("imagen"), createSlider);
+router.post("/createslider", uploadSlider.single("imagen"), createSlider);
 router.delete("/deleteslider/:id", deleteSlider);
 
 //ruta para las categorias
@@ -66,13 +70,16 @@ router.delete("/deleteproducto/:id", deleteProducto);
 //ruta para mostrar un unico producto
 router.get("/productos/:id", getProducto);
 
-//ruta para agregar un contacto
-router.post("/contactos", createContacto);
+//ruta para contactos
+router.get("/contactos", getAllContactos);
+router.post("/contactocreate", createContacto);
 
-//ruta para agregar una ayuda
-router.post("/ayudas", createAyuda);
+//ruta para ayudas
+router.get("/ayudas", getAllAyudas);
+router.post("/createayudas", createAyuda);
 
 //ruta para agregar una suscripcion
-router.post("/suscripciones", createSuscripcion);
+router.get("/suscripciones", getAllSuscripciones);
+router.post("/createsuscripciones", createSuscripcion);
 
 export default router;

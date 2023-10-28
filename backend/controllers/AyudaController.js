@@ -3,6 +3,16 @@ import AyudaModel from "../models/AyudaModel.js";
 
 //**Metodos para el CRUD */
 
+//Metodo para mostrar todas las ayudas
+export const getAllAyudas = async (req, res) => {
+  try {
+    const ayudas = await AyudaModel.findAll();
+    res.json(ayudas);
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
+
 //Metodo para crear un registro
 export const createAyuda = async (req, res) => {
   try {
