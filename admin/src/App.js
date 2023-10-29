@@ -19,7 +19,7 @@ function App() {
             <Route path="/productAdd" element={<ProductAdd />} />
             <Route path="/sliders" element={<Slider />} />
             <Route path="/sliderAdd" element={<SliderAdd />} />
-            <Route path="/sliderUpdate" element={<SliderUpdate />} />
+            <Route path="/updateSlider/:id" element={<SliderUpdate />} />
             <Route path="/contactos" element={<Contactos />} />
             <Route path="/ayudas" element={<Ayudas />} />
           </Routes>

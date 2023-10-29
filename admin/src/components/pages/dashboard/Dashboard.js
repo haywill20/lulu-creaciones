@@ -241,39 +241,44 @@ function Dashboard() {
             {/* Top Selling Items Start */}
             <div className="col-xl-6 mb-5">
               <h2 className="small-title">Productos mejor valorados</h2>
-              <div className="scroll-out mb-n2">
-                <div className="scroll-by-count" data-count={4}>
-                  {productos
-                    .filter((producto) => producto.valoracion === 5)
-                    .map((producto) => (
-                      <div className="card mb-2" key={producto.id}>
-                        <div className="row g-0 sh-14 sh-md-10">
-                          <div className="col-auto">
-                            <a href="Products.Detail.html">
-                              <img
-                                src={productImagen(`./${producto.imagen}`)}
-                                alt="alternate text"
-                                className="card-img card-img-horizontal sw-11"
-                              />
-                            </a>
-                          </div>
-                          <div className="col">
-                            <div className="card-body pt-0 pb-0 h-100">
-                              <div className="row g-0 h-100 align-content-center">
-                                <div className="col-12 col-md-9 d-flex align-items-center mb-2 mb-md-0">
-                                  <a href="Products.Detail.html">
-                                    {producto.nombre}
-                                  </a>
-                                </div>
-                                <div className="col-12 col-md-3 d-flex align-items-center justify-content-md-end text-muted text-medium">
-                                  {producto.valoracion} Estrellas
+              <div className="card sh-35 h-xl-100-card">
+                <div className="card-body scroll-out mb-n2">
+                  <div
+                    className="scroll-by-count dashboard-list"
+                    data-count={5}
+                  >
+                    {productos
+                      .filter((producto) => producto.valoracion === 5)
+                      .map((producto) => (
+                        <div className="card mb-2" key={producto.id}>
+                          <div className="row g-0 sh-14 sh-md-10">
+                            <div className="col-auto">
+                              <a href="Products.Detail.html">
+                                <img
+                                  src={productImagen(`./${producto.imagen}`)}
+                                  alt="alternate text"
+                                  className="card-img card-img-horizontal sw-11"
+                                />
+                              </a>
+                            </div>
+                            <div className="col">
+                              <div className="card-body pt-0 pb-0 h-100">
+                                <div className="row g-0 h-100 align-content-center">
+                                  <div className="col-12 col-md-9 d-flex align-items-center mb-2 mb-md-0">
+                                    <a href="Products.Detail.html">
+                                      {producto.nombre}
+                                    </a>
+                                  </div>
+                                  <div className="col-12 col-md-3 d-flex align-items-center justify-content-md-end text-muted text-medium">
+                                    {producto.valoracion} Estrellas
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -282,8 +287,11 @@ function Dashboard() {
             <div className="col-xl-6 mb-5">
               <h2 className="small-title">Productos dispobibles</h2>
               <div className="card sh-35 h-xl-100-card">
-                <div className="card-body scroll-out h-100">
-                  <div className="scroll h-100">
+                <div className="card-body scroll-out mb-n2">
+                  <div
+                    className="scroll-by-count dashboard-list"
+                    data-count={4}
+                  >
                     {productos.map((producto) => (
                       <div
                         className="d-flex flex-row align-items-center justify-content-between mb-2"

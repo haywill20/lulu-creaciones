@@ -284,10 +284,7 @@ function Slider() {
                 {currentSliders.map((slider) => (
                   <div className="card mb-2" key={slider.id}>
                     <div className="row g-0 h-100 sh-lg-11 position-relative">
-                      <a
-                        href="Products.Detail.html"
-                        className="col-auto position-relative"
-                      >
+                      <a href="/sliders" className="col-auto position-relative">
                         <img
                           src={sliderImagen(`./${slider.imagen}`)}
                           alt="product"
@@ -321,15 +318,24 @@ function Slider() {
                               </span>
                             </div>
                             <div className="col-1 d-flex flex-column mb-2 mb-lg-0 align-items-end order-2 order-lg-last justify-content-lg-center">
-                              <button className="btn">
-                                <i className="icon fa-regular fa-pen-to-square"></i>
-                              </button>
-                              <button
-                                className="btn"
-                                onClick={() => deleteSlider(slider.id)}
-                              >
-                                <i className="icon fa-regular fa-trash-can"></i>{" "}
-                              </button>
+                              <div className="row">
+                                <div className="col-1 d-flex flex-column mb-2 mb-lg-0 align-items-end order-2 order-lg-last justify-content-lg-center">
+                                  <a href={`/updateSlider/${slider.id}`}>
+                                    <i className="icon fa-regular fa-pen-to-square"></i>
+                                  </a>
+                                </div>
+                                <div className="col-1 d-flex flex-column mb-2 mb-lg-0 order-2 order-lg-last justify-content-lg-center">
+                                  <button
+                                    className="btn "
+                                    onClick={() => deleteSlider(slider.id)}
+                                  >
+                                    <a href="">
+                                      {" "}
+                                      <i className="icon fa-regular fa-trash-can"></i>{" "}
+                                    </a>
+                                  </button>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>

@@ -22,10 +22,24 @@ export const createSlider = async (req, res) => {
     if (imagen) {
       slider.imagen = imagen.filename;
     }
-    
+
     await SliderModel.create(req.body);
     res.json({
       message: "¡Slider agregado correctamente!",
+    });
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
+
+//Metodo para actualizar un producto
+export const updateSlider = async (req, res) => {
+  try {
+    await SliderModel.update(req.body, {
+      where: { id: req.params.id },
+    });
+    res.json({
+      message: "¡Slider actualizado correctamente!",
     });
   } catch (error) {
     res.json({ message: error.message });

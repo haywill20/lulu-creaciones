@@ -16,6 +16,7 @@ import {
   createSlider,
   deleteSlider,
   getAllSliders,
+  updateSlider,
 } from "../controllers/SliderControllers.js";
 import { getAllSubCategorias } from "../controllers/SubCategoriaController.js";
 import {
@@ -55,6 +56,7 @@ const uploadSlider = multer({ storage: storageSlider });
 //ruta para los sliders
 router.get("/sliders", getAllSliders);
 router.post("/createslider", uploadSlider.single("imagen"), createSlider);
+router.put("/updateslider/:id", updateSlider);
 router.delete("/deleteslider/:id", deleteSlider);
 
 //ruta para las categorias
