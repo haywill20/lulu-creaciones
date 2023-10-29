@@ -7,6 +7,7 @@ import Slider from "./components/pages/sliders/Slider";
 import SliderAdd from "./components/pages/sliders/SliderAdd";
 import Contactos from "./components/pages/contactos/Contactos";
 import Ayudas from "./components/pages/Ayudas/Ayudas";
+import SliderUpdate from "./components/pages/sliders/SliderUpdate";
 function App() {
   return (
     <>
@@ -18,6 +19,7 @@ function App() {
             <Route path="/productAdd" element={<ProductAdd />} />
             <Route path="/sliders" element={<Slider />} />
             <Route path="/sliderAdd" element={<SliderAdd />} />
+            <Route path="/sliderUpdate" element={<SliderUpdate />} />
             <Route path="/contactos" element={<Contactos />} />
             <Route path="/ayudas" element={<Ayudas />} />
           </Routes>

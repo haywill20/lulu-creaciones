@@ -284,14 +284,6 @@ function Dashboard() {
               <div className="card sh-35 h-xl-100-card">
                 <div className="card-body scroll-out h-100">
                   <div className="scroll h-100">
-                    <div className="row">
-                      <div className="col-lg-1">
-                        <h2 className="text-medium">ID</h2>
-                      </div>
-                      <div className="col-lg-11">
-                        <h2 className="text-medium">Nombre</h2>
-                      </div>
-                    </div>
                     {productos.map((producto) => (
                       <div
                         className="d-flex flex-row align-items-center justify-content-between mb-2"
