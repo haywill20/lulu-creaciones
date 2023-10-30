@@ -165,73 +165,92 @@ function Dashboard() {
               <div className="mb-5">
                 <div className="row g-2">
                   <div className="col-6 col-md-4 col-lg-2">
-                    <div className="card h-100 hover-scale-up cursor-pointer">
-                      <div className="card-body d-flex flex-column align-items-center">
-                        <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
-                          <i className="fa-solid fa-boxes-stacked text-primary"></i>
+                    <a href="/products">
+                      <div className="card h-100 hover-scale-up cursor-pointer">
+                        <div className="card-body d-flex flex-column align-items-center">
+                          <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
+                            <i className="fa-solid fa-boxes-stacked text-primary"></i>
+                          </div>
+                          <div className="mb-1 d-flex align-items-center text-alternate text-small lh-1-25">
+                            PRODUCTOS
+                          </div>
+                          <div className="text-primary cta-4">
+                            {productCount}
+                          </div>
                         </div>
-                        <div className="mb-1 d-flex align-items-center text-alternate text-small lh-1-25">
-                          PRODUCTOS
-                        </div>
-                        <div className="text-primary cta-4">{productCount}</div>
                       </div>
-                    </div>
+                    </a>
                   </div>
                   <div className="col-6 col-md-4 col-lg-2">
-                    <div className="card h-100 hover-scale-up cursor-pointer">
-                      <div className="card-body d-flex flex-column align-items-center">
-                        <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
-                          <i className="icon fa-solid fa-tags text-primary"></i>
+                    <a href="/sliders">
+                      {" "}
+                      <div className="card h-100 hover-scale-up cursor-pointer">
+                        <div className="card-body d-flex flex-column align-items-center">
+                          <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
+                            <i className="icon fa-solid fa-tags text-primary"></i>
+                          </div>
+                          <div className="mb-1 d-flex align-items-center text-alternate text-small lh-1-25">
+                            SLIDERS
+                          </div>
+                          <div className="text-primary cta-4">
+                            {slidersCount}
+                          </div>
                         </div>
-                        <div className="mb-1 d-flex align-items-center text-alternate text-small lh-1-25">
-                          SLIDERS
-                        </div>
-                        <div className="text-primary cta-4">{slidersCount}</div>
                       </div>
-                    </div>
+                    </a>
                   </div>
                   <div className="col-6 col-md-4 col-lg-2">
-                    <div className="card h-100 hover-scale-up cursor-pointer">
-                      <div className="card-body d-flex flex-column align-items-center">
-                        <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
-                          <i className="fa-regular fa-address-book text-primary"></i>
-                        </div>
-                        <div className="mb-1 d-flex align-items-center text-alternate text-small lh-1-25">
-                          CONTACTOS
-                        </div>
-                        <div className="text-primary cta-4">
-                          {contactosCount}
+                    <a href="/contactos">
+                      {" "}
+                      <div className="card h-100 hover-scale-up cursor-pointer">
+                        <div className="card-body d-flex flex-column align-items-center">
+                          <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
+                            <i className="fa-regular fa-address-book text-primary"></i>
+                          </div>
+                          <div className="mb-1 d-flex align-items-center text-alternate text-small lh-1-25">
+                            CONTACTOS
+                          </div>
+                          <div className="text-primary cta-4">
+                            {contactosCount}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </a>
                   </div>
                   <div className="col-6 col-md-4 col-lg-2">
-                    <div className="card h-100 hover-scale-up cursor-pointer">
-                      <div className="card-body d-flex flex-column align-items-center">
-                        <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
-                          <i className="fa-solid fa-paper-plane text-primary"></i>
-                        </div>
-                        <div className="mb-1 d-flex align-items-center text-alternate text-small lh-1-25">
-                          SUSCRIPCIONES
-                        </div>
-                        <div className="text-primary cta-4">
-                          {suscripcionesCount}
+                    <a href="/suscripciones">
+                      {" "}
+                      <div className="card h-100 hover-scale-up cursor-pointer">
+                        <div className="card-body d-flex flex-column align-items-center">
+                          <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
+                            <i className="fa-solid fa-paper-plane text-primary"></i>
+                          </div>
+                          <div className="mb-1 d-flex align-items-center text-alternate text-small lh-1-25">
+                            SUSCRIPCIONES
+                          </div>
+                          <div className="text-primary cta-4">
+                            {suscripcionesCount}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </a>
                   </div>
                   <div className="col-6 col-md-4 col-lg-2">
-                    <div className="card h-100 hover-scale-up cursor-pointer">
-                      <div className="card-body d-flex flex-column align-items-center">
-                        <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
-                          <i className="fa-regular fa-circle-question text-primary"></i>
+                    <a href="/ayudas">
+                      <div className="card h-100 hover-scale-up cursor-pointer">
+                        <div className="card-body d-flex flex-column align-items-center">
+                          <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
+                            <i className="fa-regular fa-circle-question text-primary"></i>
+                          </div>
+                          <div className="mb-1 d-flex align-items-center text-alternate text-small lh-1-25">
+                            AYUDAS
+                          </div>
+                          <div className="text-primary cta-4">
+                            {ayudasCount}
+                          </div>
                         </div>
-                        <div className="mb-1 d-flex align-items-center text-alternate text-small lh-1-25">
-                          AYUDAS
-                        </div>
-                        <div className="text-primary cta-4">{ayudasCount}</div>
                       </div>
-                    </div>
+                    </a>
                   </div>
                 </div>
               </div>
