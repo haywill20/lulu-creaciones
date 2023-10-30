@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const productImagen = require.context("../../../uploads/productos", true);
+const productImagen = require.context(
+  "../../../../backend/uploads/productos",
+  true
+);
 
 const CardProducto = ({ limiteProductos }) => {
   const handleComprarClick = (producto) => {
@@ -8,9 +11,11 @@ const CardProducto = ({ limiteProductos }) => {
     window.open(whatsappLink, "_blank");
   };
 
+  const productosRevertidos = [...limiteProductos].reverse();
+
   return (
     <>
-      {limiteProductos.map((producto) => (
+      {productosRevertidos.map((producto) => (
         <div className="col-sm-3" key={producto.id}>
           <div className="product-image-wrapper">
             <div className="single-products">
@@ -68,7 +73,7 @@ const CardProducto = ({ limiteProductos }) => {
                 </li>
                 <li>
                   <a href="#" onClick={() => handleComprarClick(producto)}>
-                    <i className="fa fa-money"></i>Comprar
+                    <i className="fa-brands fa-whatsapp"></i>Comprar
                   </a>
                 </li>
               </ul>

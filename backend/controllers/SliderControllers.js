@@ -12,3 +12,62 @@ export const getAllSliders = async (req, res) => {
     res.json({ message: error.message });
   }
 };
+
+//Metodo para mostrar solo un slider
+export const getSlider = async (req, res) => {
+  try {
+    const slider = await SliderModel.findAll({
+      where: { id: req.params.id },
+    });
+    res.json(slider[0]);
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
+
+//Metodo para agregar un slider
+export const createSlider = async (req, res) => {
+  try {
+    const slider = req.body;
+    const imagen = req.file;
+
+    if (imagen) {
+      slider.imagen = imagen.filename;
+    }
+
+    await SliderModel.create(req.body);
+    res.json({
+      message: "¡Slider agregado correctamente!",
+    });
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
+
+//Metodo para actualizar un producto
+export const updateSlider = async (req, res) => {
+  try {
+    await SliderModel.update(req.body, {
+      where: { id: req.params.id },
+    });
+    res.json({
+      message: "¡Slider actualizado correctamente!",
+    });
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
+
+//Metodo para eliminar un slider
+export const deleteSlider = async (req, res) => {
+  try {
+    await SliderModel.destroy({
+      where: { id: req.params.id },
+    });
+    res.json({
+      message: "¡Slider eliminado correctamente!",
+    });
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};

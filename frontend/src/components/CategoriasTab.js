@@ -1,7 +1,10 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-const productoImagen = require.context("../../uploads/productos", true);
+const productoImagen = require.context(
+  "../../../backend/uploads/productos",
+  true
+);
 
 const URIcategorias = "http://localhost:8000/categorias/";
 const URIproductos = "http://localhost:8000/productos/";

@@ -3,7 +3,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const URI = "http://localhost:8000/productos/";
-const productosImagen = require.context("../../uploads/productos", true);
+const productosImagen = require.context(
+  "../../../backend/uploads/productos",
+  true
+);
 
 const RecomendadosMini = () => {
   const [productos, setProductos] = useState([]);

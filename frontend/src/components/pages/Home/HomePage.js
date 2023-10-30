@@ -10,28 +10,49 @@ import Footer from "../../common/Footer";
 import axios from "axios";
 
 const URI = "http://localhost:8000/productos/";
+const URIcategorias = "http://localhost:8000/categorias/";
+const URIsubcategorias = "http://localhost:8000/subcategorias/";
+
 
 const HomePage = () => {
   const [productos, setProductos] = useState([]);
   const [initialProductCount, setInitialProductCount] = useState(12);
   const [selectedSubcategoria, setSelectedSubcategoria] = useState(null);
+  const [selectedSubcategoriaNombre, setSelectedSubcategoriaNombre] = useState(null);
+  const [categoriaID, setCategoriaID] = useState(null);
 
   useEffect(() => {
-    getProductos(selectedSubcategoria);
-  }, [selectedSubcategoria]);
+    getProductos(selectedSubcategoria, selectedSubcategoriaNombre, categoriaID);
+  }, [selectedSubcategoria, selectedSubcategoriaNombre, categoriaID]);
 
-  const getProductos = async (subcategoriaId) => {
+  const getProductos = async (subcategoriaId, subcategoriaNombre, categoriaId) => {
     try {
       const response = await axios.get(URI);
       let filteredProductos = response.data;
 
+      //============
+      const responseCategoria = await axios.get(URIcategorias);
+      let filterCatId = responseCategoria.data;
+
+      //============
+      const responseSubCategoria = await axios.get(URIsubcategorias);
+      let filterSubCatID = responseSubCategoria.data;
+
+      console.log("subcategoriaId", subcategoriaId);
+      console.log("subcategoriaNombre desde home", subcategoriaNombre);
+      console.log("categoriaID desde home", categoriaId);
+      
       if (subcategoriaId !== null) {
+
+        //filterCatId = filterCatId.find((categoria) => categoria.nombre === categoriaNombre).id;
+        filterSubCatID = filterSubCatID.find((subcategoria) => subcategoria.nombre === subcategoriaNombre).id;
+
         filteredProductos = filteredProductos.filter(
-          (producto) => producto.id_subcategoria === subcategoriaId
+          (producto) => producto.id_categoria === categoriaId && producto.id_subcategoria === filterSubCatID
         );
       }
 
-      setProductos(filteredProductos.slice(0, initialProductCount));
+      setProductos(filteredProductos.slice(filteredProductos.length - initialProductCount , filteredProductos.length));
     } catch (error) {
       console.error("Error al obtener los Productos:", error);
     }
@@ -45,7 +66,11 @@ const HomePage = () => {
       <section>
         <div className="container">
           <div className="row">
-            <Categorias setSelectedSubcategoria={setSelectedSubcategoria} />
+            <Categorias 
+              setSelectedSubcategoria={setSelectedSubcategoria} 
+              setSelectedSubcategoriaNombre={setSelectedSubcategoriaNombre}
+              setSelectedCategoriaId={setCategoriaID} 
+            />
             <div className="col-sm-9 padding-right">
               <div className="features_items">
                 <h2 className="title text-center">Productos</h2>

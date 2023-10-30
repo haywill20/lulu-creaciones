@@ -1,6 +1,9 @@
 import React from "react";
 
-const ShopBannerImagen = require.context("../../../../uploads", true);
+const ShopBannerImagen = require.context(
+  "../../../../../backend/uploads",
+  true
+);
 const ShopBanner = () => {
   return (
     <>

@@ -11,7 +11,10 @@ import Recomendados from "../../Recomendados";
 import RecomendadosMini from "../../RecomendadosMini";
 
 const URI = "http://localhost:8000/productos/";
-const productosImagen = require.context("../../../../uploads/productos", true);
+const productosImagen = require.context(
+  "../../../../../backend/uploads/productos",
+  true
+);
 
 const DetailsPage = () => {
   const [producto, setProducto] = useState({});

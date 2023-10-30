@@ -8,33 +8,49 @@ import Footer from "../../common/Footer";
 import axios from "axios";
 
 const URI = "http://localhost:8000/productos/";
+const URIcategorias = "http://localhost:8000/categorias/";
+const URIsubcategorias = "http://localhost:8000/subcategorias/";
 const PRODUCTOS_POR_PAGINA = 12;
 
 const ShopPage = () => {
   const [productos, setProductos] = useState([]);
   const [selectedSubcategoria, setSelectedSubcategoria] = useState(null);
   const [paginaActual, setPaginaActual] = useState(1);
+  const [categoriaID, setCategoriaID] = useState(null);
+  const [selectedSubcategoriaNombre, setSelectedSubcategoriaNombre] = useState(null);
+  const [initialProductCount, setInitialProductCount] = useState(12);
 
   useEffect(() => {
-    getProductos(selectedSubcategoria);
-  }, [selectedSubcategoria, paginaActual]);
+    getProductos(selectedSubcategoria, selectedSubcategoriaNombre, categoriaID);
+  }, [selectedSubcategoria, selectedSubcategoriaNombre, categoriaID, paginaActual]);
 
-  const getProductos = async (subcategoriaId) => {
+  const getProductos = async (subcategoriaId, subcategoriaNombre, categoriaId) => {
     try {
       const response = await axios.get(URI);
       let filteredProductos = response.data;
 
+      //============
+      const responseCategoria = await axios.get(URIcategorias);
+
+      //============
+      const responseSubCategoria = await axios.get(URIsubcategorias);
+      let filterSubCatID = responseSubCategoria.data;
+
+      console.log("subcategoriaId", subcategoriaId);
+      console.log("subcategoriaNombre desde home", subcategoriaNombre);
+      console.log("categoriaID desde home", categoriaId);
+      
       if (subcategoriaId !== null) {
+
+        //filterCatId = filterCatId.find((categoria) => categoria.nombre === categoriaNombre).id;
+        filterSubCatID = filterSubCatID.find((subcategoria) => subcategoria.nombre === subcategoriaNombre).id;
+
         filteredProductos = filteredProductos.filter(
-          (producto) => producto.id_subcategoria === subcategoriaId
+          (producto) => producto.id_categoria === categoriaId && producto.id_subcategoria === filterSubCatID
         );
       }
 
-      // Calcular los índices de inicio y fin para la página actual
-      const startIndex = (paginaActual - 1) * PRODUCTOS_POR_PAGINA;
-      const endIndex = startIndex + PRODUCTOS_POR_PAGINA;
-
-      setProductos(filteredProductos.slice(startIndex, endIndex));
+      setProductos(filteredProductos.slice(filteredProductos.length - initialProductCount , filteredProductos.length));
     } catch (error) {
       console.error("Error al obtener los Productos:", error);
     }
@@ -61,7 +77,11 @@ const ShopPage = () => {
       <section>
         <div className="container">
           <div className="row">
-            <Categorias setSelectedSubcategoria={setSelectedSubcategoria} />
+            <Categorias 
+              setSelectedSubcategoria={setSelectedSubcategoria} 
+              setSelectedSubcategoriaNombre={setSelectedSubcategoriaNombre}
+              setSelectedCategoriaId={setCategoriaID}
+            />
             <div className="col-sm-9 padding-right">
               <div className="features_items">
                 <h2 className="title text-center">Productos</h2>
