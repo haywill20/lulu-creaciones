@@ -319,15 +319,24 @@ function Products() {
                               </span>
                             </div>
                             <div className="col-1 d-flex flex-column mb-2 mb-lg-0 align-items-end order-2 order-lg-last justify-content-lg-center">
-                              <button className="btn">
-                                <i className="icon fa-regular fa-pen-to-square"></i>
-                              </button>
-                              <button
-                                className="btn"
-                                onClick={() => deleteProducto(producto.id)}
-                              >
-                                <i className="icon fa-regular fa-trash-can"></i>{" "}
-                              </button>
+                              <div className="row">
+                                <div className="col-1 d-flex flex-column mb-2 mb-lg-0 align-items-end order-2 order-lg-last justify-content-lg-center">
+                                  <a href={`/updateProduct/${producto.id}`}>
+                                    <i className="icon fa-regular fa-pen-to-square"></i>
+                                  </a>
+                                </div>
+                                <div className="col-1 d-flex flex-column mb-2 mb-lg-0 order-2 order-lg-last justify-content-lg-center">
+                                  <button
+                                    className="btn"
+                                    onClick={() => deleteProducto(producto.id)}
+                                  >
+                                    <a href="">
+                                      {" "}
+                                      <i className="icon fa-regular fa-trash-can"></i>{" "}
+                                    </a>{" "}
+                                  </button>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>

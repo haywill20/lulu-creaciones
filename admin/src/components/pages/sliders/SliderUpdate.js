@@ -4,7 +4,8 @@ import Footer from "../../common/Footer";
 import Menu from "../../common/Menu";
 import axios from "axios";
 
-const URIslider = "http://localhost:8000/updateslider/";
+const URIupdateslider = "http://localhost:8000/updateslider/";
+const URIslider = "http://localhost:8000/slider/";
 const URIproductos = "http://localhost:8000/productos/";
 const productImagen = require.context(
   "../../../../../backend/uploads/productos",
@@ -80,7 +81,7 @@ function SliderUpdate() {
     }
   };
 
-  //Metodo para actualizar un slider
+  // Método para actualizar un slider
   const updateSlider = async (e) => {
     e.preventDefault();
 
@@ -102,23 +103,15 @@ function SliderUpdate() {
       formData.append("parrafo", parrafo);
       formData.append("texto_boton", textoBoton);
       formData.append("id_producto", selectedItem.id);
-      await axios.post(URIslider + id, formData, {
+      await axios.put(URIupdateslider + id, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
 
-      setTitulo("");
-      setSubtitulo("");
-      setTextoBoton("");
-      setSelectedItem({ id: null, name: "" });
-      setParrafo("");
-      setImagePreview(null);
-      setFile(null);
+      navigate("/sliders");
       // Establecer una bandera en el almacenamiento local
       localStorage.setItem("showModalAfterReload", "true");
-
-      navigate("/sliders");
     } catch (error) {
       console.log("Error al agregar el producto");
     }
@@ -126,16 +119,22 @@ function SliderUpdate() {
 
   useEffect(() => {
     getSliderById();
-  });
+  }, []);
 
   const getSliderById = async () => {
     const res = await axios.get(URIslider + id);
-    setTitulo(res.data.titulo);
-    setSubtitulo(res.data.subtitulo);
-    setTextoBoton(res.data.textoBoton);
-    setParrafo(res.data.parrafo);
+    const sliderData = res.data;
 
-    console.log("RESPUESTA:", setTitulo);
+    setTitulo(sliderData.titulo);
+    setSubtitulo(sliderData.subtitulo);
+    setTextoBoton(sliderData.texto_boton);
+    setSelectedItem({
+      id: sliderData.id_producto,
+      name: sliderData.nombre_producto,
+    });
+    setParrafo(sliderData.parrafo);
+
+    console.log("RESPUESTA:", sliderData.titulo);
   };
 
   // En otro componente o en el componente principal
@@ -166,9 +165,9 @@ function SliderUpdate() {
     setParrafo(e.target.value);
     setParrafoExcedido(e.target.value.length > 200);
   };
+
   return (
     <>
-      {" "}
       <Menu />
       <main>
         <div className="container">

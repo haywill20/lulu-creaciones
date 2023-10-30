@@ -13,6 +13,18 @@ export const getAllSliders = async (req, res) => {
   }
 };
 
+//Metodo para mostrar solo un slider
+export const getSlider = async (req, res) => {
+  try {
+    const slider = await SliderModel.findAll({
+      where: { id: req.params.id },
+    });
+    res.json(slider[0]);
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
+
 //Metodo para agregar un slider
 export const createSlider = async (req, res) => {
   try {
