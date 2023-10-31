@@ -1,4 +1,5 @@
 import React from "react";
+import perfil from "./perfil.png";
 import { Link } from "react-router-dom";
 
 function Menu() {
@@ -25,11 +26,7 @@ function Menu() {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <img
-                className="profile"
-                alt="profile"
-                src="img/profile/perfil.png"
-              />
+              <img className="profile" alt="profile" src={perfil} />
               <div className="name">Deborah</div>
             </a>
             <div className="dropdown-menu dropdown-menu-end user-menu wide">
@@ -244,34 +241,15 @@ function Menu() {
                   <span className="label">Ayudas</span>
                 </Link>
               </li>
-              <li>
-                <a href="#orders" data-href="Orders.html">
-                  <i
-                    data-acorn-icon="cart"
-                    className="icon"
-                    data-acorn-size={18}
-                  />
-                  <span className="label">Pedidos</span>
-                </a>
-              </li>
-              <li>
-                <a href="#customers" data-href="Customers.html">
-                  <i
-                    data-acorn-icon="user"
-                    className="icon"
-                    data-acorn-size={18}
-                  />
-                  <span className="label">Clientes</span>
-                </a>
-              </li>
 
               <li>
-                <a href="#customers" data-href="Customers.html">
+                <a href="/suscripciones" data-href="Customers.html">
                   <i
-                    className="fa-solid fa-list-ul icon"
+                    className="fa-solid fa-paper-plane icon"
                     data-acorn-size={18}
                   ></i>
-                  <span className="label">Categorias</span>
+
+                  <span className="label">Suscripciones</span>
                 </a>
               </li>
 

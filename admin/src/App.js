@@ -9,6 +9,7 @@ import Contactos from "./components/pages/contactos/Contactos";
 import Ayudas from "./components/pages/Ayudas/Ayudas";
 import SliderUpdate from "./components/pages/sliders/SliderUpdate";
 import ProductUpdate from "./components/pages/products/ProductUpdate";
+import Suscripciones from "./components/pages/suscripciones/Suscripciones";
 function App() {
   return (
     <>
@@ -24,6 +25,7 @@ function App() {
             <Route path="/updateSlider/:id" element={<SliderUpdate />} />
             <Route path="/contactos" element={<Contactos />} />
             <Route path="/ayudas" element={<Ayudas />} />
+            <Route path="/suscripciones" element={<Suscripciones />} />
           </Routes>
         </BrowserRouter>
       </div>
