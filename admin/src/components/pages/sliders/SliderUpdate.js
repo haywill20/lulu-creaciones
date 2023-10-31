@@ -10,7 +10,7 @@ const URIproductos = "http://localhost:8000/productos/";
 const productImagen = require.context(
   "../../../../../backend/uploads/productos",
   true
-  );
+);
 
 function SliderUpdate() {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +27,9 @@ function SliderUpdate() {
   const [parrafoExcedido, setParrafoExcedido] = useState(false);
   const [file, setFile] = useState(null);
   const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del modal de éxito
-  const [imagePreview, setImagePreview] = useState("http://localhost:8000/images/");
+  const [imagePreview, setImagePreview] = useState(
+    "http://localhost:8000/images/"
+  );
   const [imagenName, setImagenName] = useState("");
 
   const navigate = useNavigate();
@@ -43,7 +45,6 @@ function SliderUpdate() {
       setIsOpen(false);
     }
   };
-
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -139,7 +140,6 @@ function SliderUpdate() {
     });
     setParrafo(sliderData.parrafo);
     setImagenName(sliderData.imagen);
-
   };
 
   // En otro componente o en el componente principal
@@ -186,7 +186,7 @@ function SliderUpdate() {
                 <div className="col-auto mb-3 mb-md-0 me-auto">
                   <div className="w-auto sw-md-30">
                     <h1 className="mb-0 pb-0 display-4" id="title">
-                      Agregar Slider
+                      Editar Slider
                     </h1>
                   </div>
                 </div>

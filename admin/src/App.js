@@ -8,6 +8,7 @@ import SliderAdd from "./components/pages/sliders/SliderAdd";
 import Contactos from "./components/pages/contactos/Contactos";
 import Ayudas from "./components/pages/Ayudas/Ayudas";
 import SliderUpdate from "./components/pages/sliders/SliderUpdate";
+import ProductUpdate from "./components/pages/products/ProductUpdate";
 function App() {
   return (
     <>
@@ -17,6 +18,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/products" element={<Products />} />
             <Route path="/productAdd" element={<ProductAdd />} />
+            <Route path="/updateProduct/:id" element={<ProductUpdate />} />
             <Route path="/sliders" element={<Slider />} />
             <Route path="/sliderAdd" element={<SliderAdd />} />
             <Route path="/updateSlider/:id" element={<SliderUpdate />} />
