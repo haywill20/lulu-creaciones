@@ -10,7 +10,7 @@ import CategoriasTab from "../../CategoriasTab";
 import Recomendados from "../../Recomendados";
 import RecomendadosMini from "../../RecomendadosMini";
 
-const URI = "http://localhost:8000/productos/";
+const URI = "http://localhost:8000/producto/";
 const productosImagen = require.context(
   "../../../../../backend/uploads/productos",
   true
@@ -82,7 +82,7 @@ const DetailsPage = () => {
                       <span>
                         <span>C$ {producto.precio}</span>
                         <label>Cantidad:</label>
-                        <input type="number" />
+                        <input type="number" value={producto.cantidad} />
                         <button
                           type="button"
                           className="btn btn-fefault cart"
