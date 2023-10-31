@@ -81,8 +81,8 @@ const DetailsPage = () => {
                       <img src="images/product-details/rating.png" alt="" />
                       <span>
                         <span>C$ {producto.precio}</span>
-                        <label>Cantidad:</label>
-                        <input type="number" value={producto.cantidad} />
+                        <label>disponibles:</label>
+                        <input type="text" value={producto.cantidad} />
                         <button
                           type="button"
                           className="btn btn-fefault cart"
