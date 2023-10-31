@@ -69,7 +69,7 @@ router.get("/subcategorias", getAllSubCategorias);
 
 //ruta para los productos
 router.get("/productos", getAllProductos);
-router.get("/productos/:id", getProducto);
+router.get("/producto/:id", getProducto);
 router.put("/updateproducto/:id", updateProducto);
 router.post("/createproducto", upload.single("imagen"), createProducto);
 router.delete("/deleteproducto/:id", deleteProducto);
