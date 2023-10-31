@@ -47,6 +47,15 @@ export const createSlider = async (req, res) => {
 //Metodo para actualizar un producto
 export const updateSlider = async (req, res) => {
   try {
+    console.log(req.body);
+
+    const slider = req.body;
+    const imagen = req.file;
+
+    if (imagen) {
+      slider.imagen = imagen.filename;
+    }
+
     await SliderModel.update(req.body, {
       where: { id: req.params.id },
     });

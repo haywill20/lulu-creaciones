@@ -10,7 +10,7 @@ const URIproductos = "http://localhost:8000/productos/";
 const productImagen = require.context(
   "../../../../../backend/uploads/productos",
   true
-);
+  );
 
 function SliderUpdate() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,10 +25,10 @@ function SliderUpdate() {
   const [subtituloExcedido, setSubtituloExcedido] = useState(false);
   const [textoBotonExcedido, setTextoBotonExcedido] = useState(false);
   const [parrafoExcedido, setParrafoExcedido] = useState(false);
-  const [imagePreview, setImagePreview] = useState(null);
   const [file, setFile] = useState(null);
-
   const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del modal de éxito
+  const [imagePreview, setImagePreview] = useState("http://localhost:8000/images/");
+  const [imagenName, setImagenName] = useState("");
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -43,6 +43,7 @@ function SliderUpdate() {
       setIsOpen(false);
     }
   };
+
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -97,7 +98,7 @@ function SliderUpdate() {
 
     try {
       const formData = new FormData();
-      formData.append("imagen", file);
+      formData.append("imagen", file ? file : imagenName);
       formData.append("titulo", titulo);
       formData.append("subtitulo", subtitulo);
       formData.append("parrafo", parrafo);
@@ -109,9 +110,7 @@ function SliderUpdate() {
         },
       });
 
-      navigate("/sliders");
-      // Establecer una bandera en el almacenamiento local
-      localStorage.setItem("showModalAfterReload", "true");
+      setShowModal(true);
     } catch (error) {
       console.log("Error al agregar el producto");
     }
@@ -120,6 +119,12 @@ function SliderUpdate() {
   useEffect(() => {
     getSliderById();
   }, []);
+
+  useEffect(() => {
+    if (imagenName) {
+      setImagePreview(`http://localhost:8000/images/${imagenName}`);
+    }
+  }, [imagenName]);
 
   const getSliderById = async () => {
     const res = await axios.get(URIslider + id);
@@ -133,8 +138,8 @@ function SliderUpdate() {
       name: sliderData.nombre_producto,
     });
     setParrafo(sliderData.parrafo);
+    setImagenName(sliderData.imagen);
 
-    console.log("RESPUESTA:", sliderData.titulo);
   };
 
   // En otro componente o en el componente principal
@@ -331,7 +336,6 @@ function SliderUpdate() {
                             type="file"
                             accept="image/*"
                             onChange={handleFileChange}
-                            required
                           />
                           {imagePreview && (
                             <img
@@ -376,7 +380,10 @@ function SliderUpdate() {
                   type="button"
                   className="btn btn-primary"
                   data-dismiss="modal"
-                  onClick={() => setShowModal(false)}
+                  onClick={() => {
+                    setShowModal(false);
+                    navigate("/sliders");
+                  }}
                 >
                   Cerrar
                 </button>

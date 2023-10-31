@@ -24,6 +24,8 @@ app.get("/", (req, res) => {
   res.send("Hola mundo");
 }); */
 
+app.use('/images', express.static('./uploads/sliders'))
+
 app.listen(8000, () => {
   console.log("Server UP running in http://localhost:8000/");
 });

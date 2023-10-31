@@ -58,7 +58,7 @@ const uploadSlider = multer({ storage: storageSlider });
 router.get("/sliders", getAllSliders);
 router.get("/slider/:id", getSlider);
 router.post("/createslider", uploadSlider.single("imagen"), createSlider);
-router.put("/updateslider/:id", updateSlider);
+router.put("/updateslider/:id", uploadSlider.single("imagen"), updateSlider);
 router.delete("/deleteslider/:id", deleteSlider);
 
 //ruta para las categorias
