@@ -58,7 +58,9 @@ function ProductUpdate() {
   const [precio, setPrecio] = useState("");
   const [cantidad, setCantidad] = useState("");
   const [file, setFile] = useState(null);
-  const [imagePreview, setImagePreview] = useState("http://localhost:8000/images/imagesproductos/");
+  const [imagePreview, setImagePreview] = useState(
+    "http://localhost:8000/images/imagesproductos/"
+  );
   const [imagenName, setImagenName] = useState("");
 
   const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del modal de éxito
@@ -92,7 +94,7 @@ function ProductUpdate() {
           "Content-Type": "multipart/form-data",
         },
       });
-      
+
       setShowModal(true);
       // Recargar la página
       //window.location.reload();
@@ -115,7 +117,7 @@ function ProductUpdate() {
       setImagePreview(`http://localhost:8000/imagesproductos/${imagenName}`);
     }
   }, [imagenName]);
- 
+
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     setFile(selectedFile);
@@ -463,17 +465,17 @@ function ProductUpdate() {
                 El producto editado correctamente.
               </div>
               <div className="modal-footer">
-                <button
+                <a
+                  href="/products"
                   type="button"
                   className="btn btn-primary"
                   data-dismiss="modal"
                   onClick={() => {
                     setShowModal(false);
-                    navigate("/products");
-                  } }
+                  }}
                 >
                   Cerrar
-                </button>
+                </a>
               </div>
             </div>
           </div>

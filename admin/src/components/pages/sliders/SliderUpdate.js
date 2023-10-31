@@ -373,20 +373,20 @@ function SliderUpdate() {
                 ></button>
               </div>
               <div className="modal-body">
-                El slider se agregó correctamente.
+                El slider se actualizó correctamente.
               </div>
               <div className="modal-footer">
-                <button
+                <a
+                  href="/sliders"
                   type="button"
                   className="btn btn-primary"
                   data-dismiss="modal"
                   onClick={() => {
                     setShowModal(false);
-                    navigate("/sliders");
                   }}
                 >
                   Cerrar
-                </button>
+                </a>
               </div>
             </div>
           </div>
