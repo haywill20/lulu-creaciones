@@ -58,7 +58,8 @@ function ProductUpdate() {
   const [precio, setPrecio] = useState("");
   const [cantidad, setCantidad] = useState("");
   const [file, setFile] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
+  const [imagePreview, setImagePreview] = useState("http://localhost:8000/images/imagesproductos/");
+  const [imagenName, setImagenName] = useState("");
 
   const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del modal de éxito
 
@@ -75,7 +76,7 @@ function ProductUpdate() {
 
     try {
       const formData = new FormData();
-      formData.append("imagen", file);
+      formData.append("imagen", file ? file : imagenName);
       formData.append("nombre", nombre);
       formData.append("id_categoria", selectedCategoria.id);
       formData.append("id_subcategoria", selectedSubCategoria.id);
@@ -86,30 +87,17 @@ function ProductUpdate() {
       formData.append("cantidad", cantidad);
       formData.append("precio", precio);
 
-      await axios.post(URIproducto + id, formData, {
+      await axios.put(URIupdateproducto + id, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      setNombre("");
-      setSelectedCategoria("");
-      setSelectedSubCategoria("");
-      setCod("");
-      setDisponibilidad("");
-      setCondicion("");
-      setMarca("");
-      setCantidad("");
-      setPrecio("");
-      setFile(null);
-      setImagePreview(null);
-
-      // Establecer una bandera en el almacenamiento local
-      localStorage.setItem("showModalAfterReload", "true");
-
+      
+      setShowModal(true);
       // Recargar la página
-      window.location.reload();
+      //window.location.reload();
     } catch (error) {
-      console.log("Error al agregar el producto");
+      console.log("Error al agregar el producto" + error);
     }
   };
 
@@ -122,6 +110,12 @@ function ProductUpdate() {
     }
   }, []);
 
+  useEffect(() => {
+    if (imagenName) {
+      setImagePreview(`http://localhost:8000/imagesproductos/${imagenName}`);
+    }
+  }, [imagenName]);
+ 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     setFile(selectedFile);
@@ -186,6 +180,7 @@ function ProductUpdate() {
     setCondicion(productoData.condicion);
     setMarca(productoData.marca);
     setPrecio(productoData.precio);
+    setImagenName(productoData.imagen);
   };
 
   return (
@@ -428,7 +423,6 @@ function ProductUpdate() {
                           type="file"
                           accept="image/*"
                           onChange={handleFileChange}
-                          required
                         />
                         {imagePreview && (
                           <img
@@ -466,14 +460,17 @@ function ProductUpdate() {
                 ></button>
               </div>
               <div className="modal-body">
-                El producto se agregó correctamente.
+                El producto editado correctamente.
               </div>
               <div className="modal-footer">
                 <button
                   type="button"
                   className="btn btn-primary"
                   data-dismiss="modal"
-                  onClick={() => setShowModal(false)}
+                  onClick={() => {
+                    setShowModal(false);
+                    navigate("/products");
+                  } }
                 >
                   Cerrar
                 </button>

@@ -48,6 +48,14 @@ export const createProducto = async (req, res) => {
 //Metodo para actualizar un producto
 export const updateProducto = async (req, res) => {
   try {
+    
+    const producto = req.body;
+    const imagen = req.file;
+
+    if (imagen) {
+      producto.imagen = imagen.filename;
+    }
+
     await ProductoModel.update(req.body, {
       where: { id: req.params.id },
     });

@@ -25,6 +25,7 @@ app.get("/", (req, res) => {
 }); */
 
 app.use('/images', express.static('./uploads/sliders'))
+app.use('/imagesproductos', express.static('./uploads/productos'))
 
 app.listen(8000, () => {
   console.log("Server UP running in http://localhost:8000/");
